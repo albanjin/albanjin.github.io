@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>This is a game of canvas</title>
+    <style>
+        *{margin: 0px;padding: 0px;}
+        #myCanvas{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<canvas id="myCanvas" width="1280" height="720"></canvas>
+
+<script type="text/javascript">
+
+    var myCanvas = document.getElementById("myCanvas");
+    var ctx = myCanvas.getContext("2d");
+
+    /************************图片****************************/
+    var backgroundImg ;
+    var gameImg = [];
+    var leftPic = [];
+    var btnImgArr = [];
+    var btnBorder ;
+    var timeImgArr = [];
+    var dialogueImg;
+    var imgWord;
+    var transitionImg ;
+    var selectedImg;
+    var lockBorder;
+    var lockMask;
+    var process = 0;
+    var successOrFail = true;
+
+
+    function downLoad () {
+        backgroundImg = new Image();
+        backgroundImg.src = "./image/background.jpg";
+        backgroundImg.onload = function () {
+            process += 3;
+        }
+
+        for(var i = 0;i < 20; i++){
+            var img = new Image();
+            img.src = "./image/game"+ ( i + 1 ) + ".jpg";
+            img.onload = function () {
+                process += 2;
+            }
+            gameImg.push(img);
+        }
+
+        for(var i = 0 ; i < 6; i++ ){
+            var img = new Image();
+            img.src = "./image/"+  i  + ".png";
+            img.onload = function () {
+                process += 3;
+            }
+            leftPic.push(img);
+        }
+
+        for(var i = 0 ; i < 3;i++){
+            var img = new Image();
+            img.src = "./image/btnStart" + i + ".png";
+            img.onload = function () {
+                process += 3;
+            }
+            btnImgArr.push(img);
+        }
+
+        btnBorder = new Image();
+        btnBorder.src = "./image/btnBorder.png";
+        btnBorder.onload = function () {
+            process += 2;
+        }
+
+        for(var i = 0 ; i < 10; i++){
+            var img = new Image();
+            img.src = "./image/timer/" + i + ".png";
+            img.onload = function () {
+                process += 2;
+            }
+            timeImgArr.push(img);
+        }
+
+        dialogueImg = new Image();
+        dialogueImg.src = "./image/dialogue.png";
+        dialogueImg.onload = function () {
+            process += 2;
+        }
+
+        imgWord = new Image() ;
+        imgWord.src = "./image/worlds.png";
+        imgWord.onload = function () {
+            process += 2;
+        }
+
+        transitionImg = new Image();
+        transitionImg.src = "./image/transition.png";
+        transitionImg.onload = function () {
+            process += 2;
+        }
+
+        selectedImg = new Image();
+        selectedImg.src = "./image/selected.png";
+        selectedImg.onload = function () {
+            process += 2;
+        }
+
+        lockBorder = new Image();
+        lockBorder.src = "./image/lockBorder.png";
+
+        lockMask = new Image();
+        lockMask.src = "./image/lockMask.png";
+    }
+    downLoad ();
+
+
+    /****************************other*************************/
+
+
+
+    var startGameCounter = 0;
+
+    var loopPerson = {
+        positionDialogueX : 46,
+        positionDialogueY : 318,
+        dialogue : "./image/dialogue.png",
+
+        positionWordX : 1018,
+        positionWordY : 225,
+        word : './image/worlds.png',
+
+        positionLockX : 1056,
+        positionLockY : 74,
+        lock : "./image/lockMask.png",
+        positionLockBorderX : 1056,
+        positionLockBorderY : 74,
+        lockBorder : "./image/lockBorder.png",
+        count : 6,
+        loop :function (counter) {
+            var _this = this;
+            var middleIndex = Math.floor(counter / 4);
+            var index = middleIndex % _this.count;
+            var img = leftPic[index];
+            ctx.drawImage(img,-50,0);
+            ctx.drawImage(dialogueImg,this.positionDialogueX,this.positionDialogueY);
+            ctx.drawImage(imgWord,this.positionWordX,this.positionWordY);
+            ctx.drawImage(lockMask,this.positionLockX,this.positionLockY);
+            ctx.drawImage(lockBorder,this.positionLockBorderX,this.positionLockBorderY);
+        }
+    };
+
+    var startGameBackgroundImg = {
+        count : 9,//计数
+        positionX : 415,
+        positionY : 114,
+        imgWidth : 552,
+        imgHeight : 552,
+        arrDiv : [],
+        canStart : true,
+        getImageObj : true,
+        arrImageObj : [],
+        canClickMove : true,
+        src : "",
+        disposable : true,
+        //点击开始后
+        started:false,
+
+        /*图片背景*/
+        backgroundImg : null,
+
+        init: function () {
+            if(this.disposable){
+                this.disposable = false;
+                var index = Math.floor(Math.random() * gameImg.length );
+               // this.src = imgArr[index];
+                this.backgroundImg = gameImg[index]
+            }
+            var img = this.backgroundImg; /*new Image();
+            img.src = this.src;*/
+            if(this.started){
+                this.showImages(img);
+            }else{
+                ctx.drawImage(img,this.positionX,this.positionY);
+            }
+        },
+
+        showImages : function (img) {
+            var _this = this;
+            var img = img;
+            if(_this.getImageObj){
+                _this.randomArry();
+                var result = [];
+                for(var i = 0; i < _this.arrDiv.length;i++ ){
+                    var left = _this.arrDiv[i] % 3 * _this.imgWidth / 3;
+                    var top = Math.floor( _this.arrDiv[i] / 3 ) * _this.imgHeight / 3;
+                    var left1 = i % 3 * _this.imgWidth / 3;
+                    var top1 = Math.floor( i / 3 ) * _this.imgHeight / 3;
+                    var obj = new Object();
+                    obj.index = i;
+                    obj.top = top;
+                    obj.left = left;
+                    obj.top1 = top1;//当前在大图的位置top
+                    obj.left1 =left1;//当前在大图的left
+                    obj.onBlur0 =  i/1 ? false:true;
+                    obj.onBlur1 = false;
+                    result.push(obj);
+                }
+                for(var i = 0;i < _this.arrDiv.length; i++ ){
+                    var index = _this.arrDiv[i];
+                    _this.arrImageObj.push(result[index]);
+                }
+                _this.getImageObj = false;
+                checkSuccess ()
+            }
+            _this.renderImage(img);
+        },
+
+        randomArry : function(){
+            if(this.canStart){
+                var _this = this;
+                var arr = [0,1,2,3,4,5,6,7,8];
+                while(_this.arrDiv.length < 9){
+                    var index=Math.floor(Math.random()*arr.length);
+                    _this.arrDiv.push(arr.splice(index,1).toString()-0);
+                }
+                _this.canStart = false;
+            }
+        },
+
+        renderImage : function (img) {
+            var _this = this;
+            for(var i = 0; i < _this.arrImageObj.length;i++){
+                var left1 = _this.arrImageObj[i].left1;
+                var top1 = _this.arrImageObj[i].top1;
+                var top = _this.arrImageObj[i].top;
+                var left = _this.arrImageObj[i].left;
+                ctx.drawImage(img,left1,top1,_this.imgWidth/3,_this.imgHeight/3,_this.positionX + left,_this.positionY + top,_this.imgWidth/3,_this.imgHeight/3 );
+            };
+            _this.renderTranslate();
+        },
+
+        /*渲染过渡框*/
+        renderTranslate : function () {
+            var _this = this;
+            for(var i = 0; i < _this.arrImageObj.length;i++){
+                var canRender = _this.arrImageObj[i].onBlur0;
+                var canSelected = _this.arrImageObj[i].onBlur1;
+                var left1 = _this.arrImageObj[i].left1;
+                var top1 = _this.arrImageObj[i].top1;
+                var top = _this.arrImageObj[i].top;
+                var left = _this.arrImageObj[i].left;
+
+                if(canRender){
+                    ctx.drawImage(transitionImg,_this.positionX + left,_this.positionY + top);
+                }
+                if(canSelected){
+                    //ctx.drawImage(img,left1,top1,_this.imgWidth/3,_this.imgHeight/3,_this.positionX + left,_this.positionY + top,_this.imgWidth/3,_this.imgHeight/3 );
+                    ctx.drawImage(selectedImg,_this.positionX + left,_this.positionY + top);
+                }
+            }
+        },
+        /*键盘做移动事件*/
+        moveLeft : function () {
+            var _this = this;
+            if(!_this.canClickMove){
+                return;
+            }
+            var currentId ;
+            for(var i = 0 ; i < _this.arrImageObj.length; i++ ){
+               if(_this.arrImageObj[i].onBlur0){
+                    if(_this.arrImageObj[i].left > 0){
+                        currentId = _this.arrImageObj[i];
+                    }else{
+                        return;
+                    }
+                }
+            }
+            /*如果当前焦点*/
+
+            if(!currentId){
+                for(var i = 0; i < _this.arrImageObj.length; i++ ){
+                    if(_this.arrImageObj[i].onBlur1 && _this.arrImageObj[i].left > 0){
+                        currentId = _this.arrImageObj[i];
+                    }
+                }
+            }
+
+           if(currentId){
+                for(var i = 0; i < _this.arrImageObj.length; i++ ){
+                    if(currentId.top == _this.arrImageObj[i].top && currentId.left - _this.imgWidth /3 == _this.arrImageObj[i].left ){
+                        //_this.arrImageObj[i].onBlur0 = false;
+                        if(!_this.arrImageObj[i].onBlur1){
+                           _this.arrImageObj[i].onBlur0 = true;
+                       }
+                        currentId.onBlur0 = false;
+                    }
+                }
+            }
+        },
+        /*键盘做移动事件*/
+        moveRight : function () {
+            var _this = this;
+            if(!_this.canClickMove){
+                return;
+            }
+            var currentId ;
+            for(var i = 0 ; i < _this.arrImageObj.length; i++ ){
+               /* if(_this.arrImageObj[i].onBlur0 && _this.arrImageObj[i].left < _this.imgWidth/3 *2){
+                    currentId = _this.arrImageObj[i];
+                }*/
+                if(_this.arrImageObj[i].onBlur0){
+                    if(_this.arrImageObj[i].left < _this.imgWidth/3 *2){
+                        currentId = _this.arrImageObj[i];
+                    }else{
+                        return ;
+                    }
+                }
+            }
+            if(!currentId){
+                for(var i = 0; i < _this.arrImageObj.length; i++ ){
+                    if(_this.arrImageObj[i].onBlur1 && _this.arrImageObj[i].left < _this.imgWidth/3 *2){
+                        currentId = _this.arrImageObj[i];
+                    }
+                }
+            }
+            if(currentId){
+                for(var i = 0; i < _this.arrImageObj.length; i++ ){
+                    if(currentId.top == _this.arrImageObj[i].top && currentId.left == (_this.arrImageObj[i].left/1 - _this.imgWidth /3) ){
+                        //_this.arrImageObj[i].onBlur0 = true;
+                        //_this.arrImageObj[i].onBlur0 = false;
+                        if(!_this.arrImageObj[i].onBlur1){
+                            _this.arrImageObj[i].onBlur0 = true;
+                        }
+                        currentId.onBlur0 = false;
+                    }
+                }
+            }
+        },
+        /*键盘做移动事件*/
+        moveUp : function () {
+            var _this = this;
+            if(!_this.canClickMove){
+                return;
+            }
+            var currentId ;
+            for(var i = 0 ; i < _this.arrImageObj.length; i++ ){
+               /* if(_this.arrImageObj[i].onBlur0 && _this.arrImageObj[i].top > 0){
+                    currentId = _this.arrImageObj[i];
+                }*/
+
+                if(_this.arrImageObj[i].onBlur0 ){
+                    if( _this.arrImageObj[i].top > 0){
+                        currentId = _this.arrImageObj[i];
+                    }else {
+                        return;
+                    }
+
+                }
+            }
+            if(!currentId){
+                for(var i = 0; i < _this.arrImageObj.length; i++ ){
+                    if(_this.arrImageObj[i].onBlur1 && _this.arrImageObj[i].top > 0){
+                        currentId = _this.arrImageObj[i];
+                    }
+                }
+            }
+            if(currentId){
+                for(var i = 0; i < _this.arrImageObj.length; i++ ){
+                    if(currentId.left == _this.arrImageObj[i].left && currentId.top == (_this.arrImageObj[i].top/1 + _this.imgHeight / 3) ){
+                        //_this.arrImageObj[i].onBlur0 = false;
+                        if(!_this.arrImageObj[i].onBlur1){
+                            _this.arrImageObj[i].onBlur0 = true;
+                        }
+                        currentId.onBlur0 = false;
+                    }
+                }
+            }
+        },
+        /*键盘做移动事件*/
+        moveDown : function () {
+            var _this = this;
+            if(!_this.canClickMove){
+                return;
+            }
+            var currentId ;
+            for(var i = 0 ; i < _this.arrImageObj.length; i++ ){
+                /*if(_this.arrImageObj[i].onBlur0 && _this.arrImageObj[i].top < _this.imgHeight / 3 * 2){
+                    currentId = _this.arrImageObj[i];
+                }*/
+                if(_this.arrImageObj[i].onBlur0){
+                    if( _this.arrImageObj[i].top < _this.imgHeight / 3 * 2){
+                        currentId = _this.arrImageObj[i];
+                    }else {
+                        return;
+                    }
+                }
+            }
+            if(!currentId){
+                for(var i = 0; i < _this.arrImageObj.length; i++ ){
+                    if(_this.arrImageObj[i].onBlur1 && _this.arrImageObj[i].top < _this.imgHeight / 3 * 2){
+                        currentId = _this.arrImageObj[i];
+                    }
+                }
+            }
+            if(currentId){
+                for(var i = 0; i < _this.arrImageObj.length; i++ ){
+                    if(currentId.left == _this.arrImageObj[i].left && currentId.top == (_this.arrImageObj[i].top/1 - _this.imgHeight / 3) ){
+                        _this.arrImageObj[i].onBlur0 = false;
+                        if(!_this.arrImageObj[i].onBlur1){
+                            _this.arrImageObj[i].onBlur0 = true;
+                        }
+
+                        currentId.onBlur0 = false;
+                    }
+                }
+            }
+        },
+        /*点击事件*/
+        clickOk : function () {
+            var _this = this ;
+            if(!_this.canClickMove){
+                return;
+            }
+            var currentId ;
+            var beforeId;
+
+            for(var i = 0 ; i < _this.arrImageObj.length; i++ ){
+                if(_this.arrImageObj[i].onBlur1){
+                    currentId = _this.arrImageObj[i];
+                }
+            }
+
+            if(!currentId){
+                for(var i = 0 ; i < _this.arrImageObj.length; i++ ){
+                    if(_this.arrImageObj[i].onBlur0 && !_this.arrImageObj[i].onBlur1){
+                         _this.arrImageObj[i].onBlur1 = true;
+                         _this.arrImageObj[i].onBlur0 = false;
+                    }else if(_this.arrImageObj[i].onBlur0 && _this.arrImageObj[i].onBlur1){
+                        _this.arrImageObj[i].onBlur1 = false;
+                        _this.arrImageObj[i].onBlur0 = true;
+                    }
+                }
+            }else{
+                for(var i = 0 ; i < _this.arrImageObj.length; i++ ){
+                     if( _this.arrImageObj[i].onBlur0){
+                        beforeId =  _this.arrImageObj[i];
+                     }
+                 }
+                if(!beforeId){
+                    currentId.onBlur0 = true;
+                    currentId.onBlur1 = false;
+                }else{
+                    changeImage (currentId,beforeId)
+                }
+            }
+        }
+    }
+
+    function changeImage (currentId,beforeId) {
+        startGameBackgroundImg.canClickMove = false;
+        var step = 10;
+        var index = 0;
+        var Xper = (currentId.left - beforeId.left)/step;
+        var YPer = (currentId.top - beforeId.top)/step;
+        var top0 = currentId.top;
+        var top1 = beforeId.top;
+        var left0 = currentId.left;
+        var left1 = beforeId.left;
+        var index0 = currentId.index;
+        var index1 = beforeId.index;
+        currentId.index = index1;
+        beforeId.index = index0;
+        var timer = setInterval(function() {
+            if(index < step){
+                currentId.left += -Xper;
+                currentId.top += -YPer;
+                beforeId.left += Xper;
+                beforeId.top += YPer;
+            }else{
+                clearInterval(timer);
+                currentId.onBlur1 = false;
+                currentId.left = left1;
+                beforeId.left = left0;
+                currentId.top = top1;
+                beforeId.top = top0;
+                startGameBackgroundImg.canClickMove = true;
+                checkSuccess();
+            }
+            index ++;
+        },100)
+    }
+
+    function checkSuccess () {
+        var target = [0,1,2,3,4,5,6,7,8];
+        var result = [];
+        for(var i = 0 ; i < startGameBackgroundImg.arrImageObj.length; i++){
+            result.push(startGameBackgroundImg.arrImageObj[i].index);
+        }
+        if(target.toString() == result.toString() ){
+            //console.log("success!")
+            //window.location.href = "";
+            if(successOrFail){
+                successOrFail = false;
+            }
+
+            /*重新开始*/
+            startGameBackgroundImg.disposable = true;
+            startGameBackgroundImg.getImageObj = true;
+            startGameBackgroundImg.arrImageObj = [];
+        }
+    }
+
+    /*绘制开始按钮*/
+
+    var startBtn = {
+        totalTimer : 60,
+        positionX : 100,
+        positionY :550,
+        positionX1 : 95,
+        positionY1 : 540,
+        img0 : "./image/btnStart0.png",
+        img1 : "./image/btnStart1.png",
+        img2 : "./image/btnStart2.png",
+        selected : "./image/btnBorder.png",
+        init : function (conter) {
+            if(startGameBackgroundImg.started){
+                this.startGame(conter);
+            }else{
+                this.ready();
+            }
+        },
+
+        ready : function () {
+            var img1 = new Image();
+            img1.src = this.selected;
+            ctx.drawImage(btnImgArr[0],this.positionX,this.positionY);
+            ctx.drawImage(btnBorder,this.positionX1,this.positionY1);
+        },
+        startGame : function (conter) {
+            var  index  = Math.floor( conter / 20);
+            if(index <= this.totalTimer && this.totalTimer - index < 10 && this.totalTimer - index >= 0){
+                ctx.drawImage(btnImgArr[2],this.positionX,this.positionY);
+                timerCounter.init(index);
+            }else if(index < this.totalTimer){
+                ctx.drawImage(btnImgArr[1],this.positionX,this.positionY);
+                timerCounter.init(index);
+            }else {
+                //alert("fail");
+                //console.log("shibai!");
+                //window.location.href = ""
+
+                if(successOrFail){
+                    successOrFail = false;
+                }
+                timerCounter.init(60);
+                ctx.drawImage(btnImgArr[2],this.positionX,this.positionY);
+            }
+        }
+    }
+
+
+    var timerCounter = {
+        positionX1 : 150,
+        positionY1 : 570,
+        positionX2 : 180,
+        positionY2 : 570,
+        init : function (index) {
+            var time = startBtn.totalTimer - index;// Math.abs( time - startBtn.totalTimer );
+            var string =  time < 10 ? "0" + time : time + "";
+            var index1 = string.charAt(0);
+            var index2 = string.charAt(1);
+            ctx.drawImage(timeImgArr[index1],this.positionX1,this.positionY1);
+            ctx.drawImage(timeImgArr[index2],this.positionX2,this.positionY2);
+        }
+    }
+
+
+
+    /*********canvas 主程序 *********/
+    function startEngine(){
+        setInterval(function(){
+
+            if(!process == 100){
+
+            }else{
+                ctx.clearRect(0,0,1280,720);
+                ctx.drawImage(backgroundImg,0,0);
+                startGameBackgroundImg.init();
+                loopPerson.loop(startGameCounter);
+                startBtn.init(startGameCounter);
+                startGameCounter ++;
+            }
+
+
+        }, 50); //每一秒动24次
+    }
+    startEngine();
+
+
+    document.onkeydown = function (e) {
+        var code = e.keyCode;
+        switch (code){
+            case 37:
+                moveLeft();
+                break;
+            case 39:
+                moveRight();
+                break;
+            case 38:
+                moveUp();
+                break;
+            case 40:
+                moveDown();
+                break;
+            case 13:
+                clickOk();
+                break;
+        }
+    }
+
+    function moveLeft () {
+        if(startGameBackgroundImg.started){
+            startGameBackgroundImg.moveLeft();
+        }
+    }
+
+    function moveRight(){
+        if(startGameBackgroundImg.started){
+            startGameBackgroundImg.moveRight();
+        }
+    }
+
+    function moveUp () {
+        if(startGameBackgroundImg.started){
+            startGameBackgroundImg.moveUp();
+        }
+    }
+
+    function moveDown () {
+        if(startGameBackgroundImg.started){
+            startGameBackgroundImg.moveDown();
+        }
+    }
+
+    function clickOk () {
+        if(startGameBackgroundImg.started){
+            startGameBackgroundImg.clickOk();
+        }else{
+            startGameBackgroundImg.started = true;
+            startGameCounter = 0;
+        }
+    }
+/**********************************对图片进行加载**************************************/
+
+
+
+</script>
+</body>
+</html>
