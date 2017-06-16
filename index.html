@@ -21,7 +21,7 @@
     var myCanvas = document.getElementById("myCanvas");
     var ctx = myCanvas.getContext("2d");
 
-    /************************图片****************************/
+
     var backgroundImg ;
     var gameImg = [];
     var leftPic = [];
@@ -205,8 +205,8 @@
                     obj.index = i;
                     obj.top = top;
                     obj.left = left;
-                    obj.top1 = top1;//当前在大图的位置top
-                    obj.left1 =left1;//当前在大图的left
+                    obj.top1 = top1;
+                    obj.left1 =left1;
                     obj.onBlur0 =  i/1 ? false:true;
                     obj.onBlur1 = false;
                     result.push(obj);
@@ -245,7 +245,7 @@
             _this.renderTranslate();
         },
 
-        /*渲染过渡框*/
+       
         renderTranslate : function () {
             var _this = this;
             for(var i = 0; i < _this.arrImageObj.length;i++){
@@ -265,7 +265,6 @@
                 }
             }
         },
-        /*键盘做移动事件*/
         moveLeft : function () {
             var _this = this;
             if(!_this.canClickMove){
@@ -281,7 +280,7 @@
                     }
                 }
             }
-            /*如果当前焦点*/
+            
 
             if(!currentId){
                 for(var i = 0; i < _this.arrImageObj.length; i++ ){
@@ -303,7 +302,7 @@
                 }
             }
         },
-        /*键盘做移动事件*/
+      
         moveRight : function () {
             var _this = this;
             if(!_this.canClickMove){
@@ -342,7 +341,7 @@
                 }
             }
         },
-        /*键盘做移动事件*/
+
         moveUp : function () {
             var _this = this;
             if(!_this.canClickMove){
@@ -382,7 +381,7 @@
                 }
             }
         },
-        /*键盘做移动事件*/
+      
         moveDown : function () {
             var _this = this;
             if(!_this.canClickMove){
@@ -508,15 +507,13 @@
             if(successOrFail){
                 successOrFail = false;
             }
-
-            /*重新开始*/
             startGameBackgroundImg.disposable = true;
             startGameBackgroundImg.getImageObj = true;
             startGameBackgroundImg.arrImageObj = [];
         }
     }
 
-    /*绘制开始按钮*/
+
 
     var startBtn = {
         totalTimer : 60,
@@ -551,10 +548,6 @@
                 ctx.drawImage(btnImgArr[1],this.positionX,this.positionY);
                 timerCounter.init(index);
             }else {
-                //alert("fail");
-                //console.log("shibai!");
-                //window.location.href = ""
-
                 if(successOrFail){
                     successOrFail = false;
                 }
