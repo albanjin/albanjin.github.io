@@ -1,658 +1,536 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>This is a game of canvas</title>
-	 <meta name="Author" content="Albanjin">
-	 <meta name="Keywords" content="拼图游戏，9宫格拼图 ，小游戏，canvas拼图小游戏">
-	 <meta name="Description" content="拼图游戏，9宫格拼图 ，小游戏，canvas拼图小游戏">
+<!--
+<%@ page contentType="text/html;charset=utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>-->
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head >
+    <title>this is a mainPage</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="page-view-size" content ="1280*720" />
+
     <style>
-        *{margin: 0px;padding: 0px;}
-        #myCanvas{
-            position: absolute;
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            outline: none;
+            text-decoration: none;
         }
+        .main{
+            position: absolute;
+            width: 1280px;
+            height: 720px;
+            margin: 0px;
+            padding: 0px;
+            top: 0px;
+            left: 0px;
+            overflow: hidden;
+            background: url("./image/mainPage/background.jpg");
+        }
+
+        div{
+            position: absolute;
+            top:0px;
+            left:0px;
+        }
+
     </style>
+
 </head>
 <body>
-<canvas id="myCanvas" width="1280" height="720"></canvas>
+<div  class="main">
+
+    <div id="aircraft0" style="width:134px;height:88px;position: absolute;top:141px;left:59px;">
+        <img style="position: absolute;top:0px;left:0px;visibility: visible;" src="./image/mainPage/aircraft0.png" alt="">
+        <img style="position: absolute;top:0px;left:0px;visibility: hidden;" src="./image/mainPage/aircraft1.png" alt="">
+    </div>
+    <div id="aircraft1" style="width:184px;height:186px;position: absolute;top:77px;left:243px;">
+        <img style="position: absolute;top:0px;left:0px;visibility: visible;" src="./image/mainPage/rendy1.png" alt="">
+        <img style="position: absolute;top:0px;left:0px;visibility: hidden;" src="./image/mainPage/rendy0.png" alt="">
+    </div>
+    <div id="aircraftPointer" style="position: absolute;top: 352px;left: 232px;width: 101px;height: 105px;">
+        <img src="./image/mainPage/pointer0.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/mainPage/pointer1.png" style="position: absolute;top:0px;left:0px;visibility: hidden;"alt="">
+    </div>
+
+
+    <!--race-->
+    <div id="race">
+        <img src="./image/mainPage/car0.png" style="visibility: visible;position: absolute;top: 459px;left: 602px;">
+        <img src="./image/mainPage/car0.png" style="visibility: hidden;position: absolute;top: 511px;left: 492px;">
+        <img src="./image/mainPage/car0.png" style="visibility: hidden;position: absolute;top: 254px;left: 661px;">
+        <img src="./image/mainPage/car0.png" style="visibility: hidden;position: absolute;top: 312px;left: 557px;">
+        <img src="./image/mainPage/car1.png" style="visibility: hidden;position: absolute;top: 360px;left: 625px;">
+        <img src="./image/mainPage/car0.png" style="visibility: hidden;position: absolute;top: 409px;left: 700px;">
+    </div>
+    <div style="width: 86px;height: 55px;position: absolute;top:390px;left:595px;">
+        <img  id="race_lamp"  src="./image/mainPage/lamp.png" style="visibility: hidden" alt="">
+    </div>
+    <div id="race_flog" style="width: 111px;height: 90px;position: absolute;top:0px;left:0px;">
+
+        <img src="./image/mainPage/flog1.png" style="position: absolute;top:440px;left:406px;visibility: hidden" alt="">
+        <img src="./image/mainPage/flog0.png" style="position: absolute;top:440px;left:406px;visibility: visible" alt="">
+    </div>
+    <div id="racePointer" style="position: absolute;top: 541px;left: 432px;width: 101px;height: 105px;">
+        <img src="./image/mainPage/pointer0.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/mainPage/pointer1.png" style="position: absolute;top:0px;left:0px;visibility: hidden;"alt="">
+    </div>
+
+
+
+    <div id="gamePointer" style="position: absolute;top: 204px;left: 641px;width: 101px;height: 105px;">
+        <img src="./image/mainPage/pointer0.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/mainPage/pointer1.png" style="position: absolute;top:0px;left:0px;visibility: hidden;"alt="">
+    </div>
+
+    <!--dragon-->
+    <div id="dragon">
+        <img src="./image/mainPage/dragon0.png" style="position: absolute;top:106px;left:868px;visibility: hidden;" alt="">
+        <img src="./image/mainPage/dragon1.png" style="position: absolute;top:99px;left:808px;visibility: hidden;" alt="">
+        <img src="./image/mainPage/dragon2.png" style="position: absolute;top:229px;left:738px;visibility: hidden;" alt="">
+    </div>
+    <div id="dragonPointer" style="position: absolute;top: 278px;left: 941px;width: 101px;height: 105px;">
+        <img src="./image/mainPage/pointer0.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/mainPage/pointer1.png" style="position: absolute;top:0px;left:0px;visibility: hidden;"alt="">
+    </div>
+
+
+
+    <!--island-->
+    <div id="boat">
+        <img src="./image/mainPage/boat.png" style="position: absolute;top:505px;left:812px;visibility: visible;" alt="">
+        <img src="./image/mainPage/boat.png" style="position: absolute;top:555px;left:675px;visibility: hidden;" alt="">
+        <img src="./image/mainPage/boat1.png" style="position: absolute;top:627px;left:540px;visibility: hidden;" alt="">
+        <img src="./image/mainPage/boat2.png" style="position: absolute;top:340px;left:1185px;visibility: hidden;" alt="">
+        <img src="./image/mainPage/boat.png" style="position: absolute;top:379px;left:1064px;visibility: hidden;" alt="">
+        <img src="./image/mainPage/boat.png" style="position: absolute;top:479px;left:964px;visibility: hidden;" alt="">
+
+    </div>
+
+    
+
+    <div style="width: 290px;height: 289px;position: absolute;top:401px;left: 878px;">
+        <img src="./image/mainPage/island.png" alt="">
+    </div>
+
+    <div id="island" style="width: 148px;height: 181px;position: absolute;top:355px;left:940px;">
+        <img src="./image/mainPage/person0.png" style="position: absolute;top:0px;left:0px;visibility: visible" alt="">
+        <img src="./image/mainPage/person1.png" style="position: absolute;top:0px;left:0px;visibility: hidden" alt="">
+    </div>
+
+    <div id="islandPointer" style="position: absolute;top: 590px;left: 1016px;width: 101px;height: 105px;">
+        <img src="./image/mainPage/pointer0.png" style="position: absolute;top:0px;left:0px;visibility: visible;" alt="">
+        <img src="./image/mainPage/pointer1.png" style="position: absolute;top:0px;left:0px;visibility: hidden;"alt="">
+    </div>
+
+    <!--焦点-->
+    <div id="hands_x0_y0_selectFocus0_" style="position: absolute;top:495px;left:15px;width: 2px;height:2px;">
+        <img id="selectFocus0" src="./image/mainPage/selected1.png" style="visibility: hidden;" alt="">
+    </div>
+
+    <div id="hands_x0_y0_selectFocus1_" style="position: absolute;top:576px;left:44px;width: 178px;height:107px;">
+        <img id="selectFocus1" src="./image/mainPage/selected0.png" style="visibility: hidden;" alt="">
+    </div>
+
+    <!--超级飞侠-->
+    <div id="hands_x0_y0_selectFocus2_" style="position: absolute;top:100px;left:100px;width: 2px;height:2px;">
+        <img id="selectFocus2" src="./image/mainPage/change.png" style="visibility: hidden;" alt="">
+    </div>
+
+    <!--赛车总动员-->
+    <div id="hands_x0_y0_selectFocus3_" style="position: absolute;top:100px;left:100px;width: 2px;height:2px;">
+        <img id="selectFocus3" src="./image/mainPage/change.png" style="visibility: hidden;" alt="">
+    </div>
+
+    <!--游戏屋-->
+    <div id="hands_x0_y0_selectFocus4_" style="position: absolute;top:100px;left:100px;width: 2px;height:2px;">
+        <img id="selectFocus4" src="./image/mainPage/change.png" style="visibility: hidden;" alt="">
+    </div>
+
+    <!--斗龙战士-->
+    <div id="hands_x0_y0_selectFocus5_" style="position: absolute;top:100px;left:100px;width: 2px;height:2px;">
+        <img id="selectFocus5" src="./image/mainPage/change.png" style="visibility: hidden;" alt="">
+    </div>
+
+    <!--神偷奶爸-->
+    <div id="hands_x0_y0_selectFocus6_" style="position: absolute;top:100px;left:100px;width: 2px;height:2px;">
+        <img id="selectFocus6" src="./image/mainPage/change.png" style="visibility: hidden;"  alt="">
+    </div>
+
+    <!--返回-->
+    <div id="hands_x0_y0_selectFocus7_" style="position: absolute;top: 14px;left: 1172px;width: 81px;height:63px;">
+        <img id="selectFocus7" src="./image/mainPage/selected2.png" style="visibility: hidden;" alt="">
+    </div>
+
+</div>
+<script type="text/javascript" src="./js/common1_1.js"></script>
+<script type="text/javascript" src="./js/key1_3.js"></script>
 
 <script type="text/javascript">
-
-    var myCanvas = document.getElementById("myCanvas");
-    var ctx = myCanvas.getContext("2d");
+        /*************************对接数据**********************/
 
 
-    var backgroundImg ;
-    var gameImg = [];
-    var leftPic = [];
-    var btnImgArr = [];
-    var btnBorder ;
-    var timeImgArr = [];
-    var dialogueImg;
-    var imgWord;
-    var transitionImg ;
-    var selectedImg;
-    var lockBorder;
-    var lockMask;
-    var process = 0;
-    var successOrFail = true;
-
-
-    function downLoad () {
-        backgroundImg = new Image();
-        backgroundImg.src = "./image/background.jpg";
-        backgroundImg.onload = function () {
-            process += 3;
-        }
-
-        for(var i = 0;i < 20; i++){
-            var img = new Image();
-            img.src = "./image/game"+ ( i + 1 ) + ".jpg";
-            img.onload = function () {
-                process += 2;
-            }
-            gameImg.push(img);
-        }
-
-        for(var i = 0 ; i < 6; i++ ){
-            var img = new Image();
-            img.src = "./image/"+  i  + ".png";
-            img.onload = function () {
-                process += 3;
-            }
-            leftPic.push(img);
-        }
-
-        for(var i = 0 ; i < 3;i++){
-            var img = new Image();
-            img.src = "./image/btnStart" + i + ".png";
-            img.onload = function () {
-                process += 3;
-            }
-            btnImgArr.push(img);
-        }
-
-        btnBorder = new Image();
-        btnBorder.src = "./image/btnBorder.png";
-        btnBorder.onload = function () {
-            process += 2;
-        }
-
-        for(var i = 0 ; i < 10; i++){
-            var img = new Image();
-            img.src = "./image/timer/" + i + ".png";
-            img.onload = function () {
-                process += 2;
-            }
-            timeImgArr.push(img);
-        }
-
-        dialogueImg = new Image();
-        dialogueImg.src = "./image/dialogue.png";
-        dialogueImg.onload = function () {
-            process += 2;
-        }
-
-        imgWord = new Image() ;
-        imgWord.src = "./image/worlds.png";
-        imgWord.onload = function () {
-            process += 2;
-        }
-
-        transitionImg = new Image();
-        transitionImg.src = "./image/transition.png";
-        transitionImg.onload = function () {
-            process += 2;
-        }
-
-        selectedImg = new Image();
-        selectedImg.src = "./image/selected.png";
-        selectedImg.onload = function () {
-            process += 2;
-        }
-
-        lockBorder = new Image();
-        lockBorder.src = "./image/lockBorder.png";
-
-        lockMask = new Image();
-        lockMask.src = "./image/lockMask.png";
+    /***************************跳转地址**************************************/
+    function backfunc () {
+        //返回跳转地址
+        window.location.href = "";
     }
-    downLoad ();
 
-
-    /****************************other*************************/
-
-
-
-    var startGameCounter = 0;
-
-    var loopPerson = {
-        positionDialogueX : 46,
-        positionDialogueY : 318,
-        dialogue : "./image/dialogue.png",
-
-        positionWordX : 1018,
-        positionWordY : 225,
-        word : './image/worlds.png',
-
-        positionLockX : 1056,
-        positionLockY : 74,
-        lock : "./image/lockMask.png",
-        positionLockBorderX : 1056,
-        positionLockBorderY : 74,
-        lockBorder : "./image/lockBorder.png",
-        count : 6,
-        loop :function (counter) {
-            var _this = this;
-            var middleIndex = Math.floor(counter / 4);
-            var index = middleIndex % _this.count;
-            var img = leftPic[index];
-            ctx.drawImage(img,-50,0);
-            ctx.drawImage(dialogueImg,this.positionDialogueX,this.positionDialogueY);
-            ctx.drawImage(imgWord,this.positionWordX,this.positionWordY);
-            ctx.drawImage(lockMask,this.positionLockX,this.positionLockY);
-            ctx.drawImage(lockBorder,this.positionLockBorderX,this.positionLockBorderY);
+    function goSomeWhere (index) {
+        var url = "";
+        switch (index){
+            case 0 :
+                    //排行榜
+                url = "";
+                break;
+            case 1 :
+                    //活动规则
+                url = "";
+                break;
+            case 2 :
+                    //超级飞侠
+                url = "";
+                break;
+            case 3 :
+                    //赛车总动员
+                url = "";
+                break;
+            case 4 :
+                    //游戏屋
+                url = "startGame0.html";
+                break;
+            case 5 :
+                    //斗龙战士
+                url = "startGame.html";
+                break;
+            case 6 :
+                    //大萌眼
+                url = "";
+                break;
         }
+        window.location.href = url;
+    }
+
+
+
+
+    var counter = 0;
+    var buttons=[
+        {
+            id: 'hands_x0_y0_selectFocus0_',
+            clickHandler: 'javascript:goSomeWhere(0)',
+            left: 'disable',
+            right: 'hands_x0_y0_selectFocus2_',
+            up: 'disable',
+            down:  'hands_x0_y0_selectFocus1_',
+            focusType: 7
+        },
+
+        {
+            id: 'hands_x0_y0_selectFocus1_',
+            clickHandler: 'javascript:goSomeWhere(1)',
+            left: 'hands_x0_y0_selectFocus0_',
+            right: 'hands_x0_y0_selectFocus2_',
+            up: 'hands_x0_y0_selectFocus0_',
+            down:  'disable',
+            focusType: 7
+        },
+
+        {
+            id: 'hands_x0_y0_selectFocus2_',
+            clickHandler: 'javascript:goSomeWhere(2)',
+            left: 'hands_x0_y0_selectFocus1_',
+            right: 'hands_x0_y0_selectFocus3_',
+            up: 'disable',
+            down:  'hands_x0_y0_selectFocus3_',
+            otherFocusEvent:'javascript:aircraft()',
+            // 失去焦点时，执行的事件
+            otherBlurEvent:'javascript:animate.clearAircraft()',
+            focusType: 7
+        },
+
+        {
+            id: 'hands_x0_y0_selectFocus3_',
+            clickHandler: 'javascript:goSomeWhere(3)',
+            left: 'hands_x0_y0_selectFocus2_',
+            right: 'hands_x0_y0_selectFocus4_',
+            up: 'hands_x0_y0_selectFocus2_',
+            down:  'disable',
+            otherFocusEvent:'javascript:race()',
+            // 失去焦点时，执行的事件
+            otherBlurEvent:'javascript:animate.clearRace()',
+            focusType: 7
+        },
+
+        {
+            id: 'hands_x0_y0_selectFocus4_',
+            clickHandler: 'javascript:goSomeWhere(4)',
+            left: 'hands_x0_y0_selectFocus3_',
+            right: 'hands_x0_y0_selectFocus5_',
+            up: 'disable',
+            down:  'disable',
+            otherFocusEvent:'javascript:game()',
+            // 失去焦点时，执行的事件
+            otherBlurEvent:'javascript:animate.clearGame()',
+            focusType: 7
+        },
+        {
+            id: 'hands_x0_y0_selectFocus5_',
+            clickHandler: 'javascript:goSomeWhere(5)',
+            left: 'hands_x0_y0_selectFocus4_',
+            right: 'hands_x0_y0_selectFocus6_',
+            up: 'disable',
+            down:  'disable',
+            otherFocusEvent:'javascript:dragon()',
+            // 失去焦点时，执行的事件
+            otherBlurEvent:'javascript:animate.clearDragon()',
+            focusType: 7
+        },
+        {
+            id: 'hands_x0_y0_selectFocus6_',
+            clickHandler: 'javascript:goSomeWhere(6)',
+            left: 'hands_x0_y0_selectFocus5_',
+            right: 'hands_x0_y0_selectFocus7_',
+            up: 'hands_x0_y0_selectFocus7_',
+            down:  'disable',
+            otherFocusEvent:'javascript:island()',
+            // 失去焦点时，执行的事件
+            otherBlurEvent:'javascript:animate.clearIsland()',
+            focusType: 7
+        },
+        {
+            id: 'hands_x0_y0_selectFocus7_',
+            clickHandler: 'javascript:backfunc()',
+            left: 'hands_x0_y0_selectFocus6_',
+            right: 'disable',
+            up: 'disable',
+            down:  'hands_x0_y0_selectFocus6_',
+            focusType: 7
+        }
+
+    ];
+    /*初始化*/
+    focusInit();
+    var start=getFocusModel6("hands_x0_y0_selectFocus6_");
+    start.defaultFocus();
+
+
+    var aircraftArr0 = document.getElementById("aircraft0").getElementsByTagName("img");
+    var aircraftArr1 = document.getElementById("aircraft1").getElementsByTagName("img");
+    var aircraftPointer = document.getElementById("aircraftPointer").getElementsByTagName("img");
+    var animate = new Object();
+    animate.aircraftBoolean = false;
+    animate.aircraftTimer = null;
+
+    animate.loopAircraft = function () {
+        var _this = this;
+        var index = 0;
+        _this.aircraftTimer = setInterval(function(){
+            if(_this.aircraftBoolean){
+                if(index % 2){
+                    aircraftArr0[0].style.visibility = "visible";
+                    aircraftArr1[0].style.visibility = "visible";
+                    aircraftArr0[1].style.visibility = "hidden";
+                    aircraftArr1[1].style.visibility = "hidden";
+                    aircraftPointer[0].style.visibility ="visible";
+                    aircraftPointer[1].style.visibility ="hidden";
+                }else{
+                    aircraftArr0[1].style.visibility = "visible";
+                    aircraftArr1[1].style.visibility = "visible";
+                    aircraftArr0[0].style.visibility = "hidden";
+                    aircraftArr1[0].style.visibility = "hidden";
+                    aircraftPointer[1].style.visibility ="visible";
+                    aircraftPointer[0].style.visibility ="hidden";
+                }
+            }else{
+                clearInterval(_this.aircraftTimer);
+                aircraftPointer[1].style.visibility ="hidden";
+                aircraftPointer[0].style.visibility ="hidden";
+                aircraftArr0[0].style.visibility = "visible";
+                aircraftArr1[0].style.visibility = "visible";
+                aircraftArr0[1].style.visibility = "hidden";
+                aircraftArr1[1].style.visibility = "hidden";
+            }
+                index ++;
+        },300)
+    };
+    animate.clearAircraft = function () {
+        this.aircraftBoolean = false;
     };
 
-    var startGameBackgroundImg = {
-        count : 9,//计数
-        positionX : 415,
-        positionY : 114,
-        imgWidth : 552,
-        imgHeight : 552,
-        arrDiv : [],
-        canStart : true,
-        getImageObj : true,
-        arrImageObj : [],
-        canClickMove : true,
-        src : "",
-        disposable : true,
-        //点击开始后
-        started:false,
+    animate.raceBoolean = false;
+    animate.raceTimer = null;
+    animate.raceArr = document.getElementById("race").getElementsByTagName("img");
+    animate.raceFlogArr = document.getElementById("race_flog").getElementsByTagName("img");
+    animate.racePointerArr = document.getElementById("racePointer").getElementsByTagName("img");
+    animate.loopRace = function () {
+        var _this = this;
+        var index = 0;
+        _this.raceTimer = setInterval(function () {
+            if(_this.raceBoolean){
+                var beforeIndex ;
+                var nowIndex = index % _this.raceArr.length;
+                beforeIndex = nowIndex ? nowIndex - 1 : _this.raceArr.length - 1;
+                _this.raceArr[nowIndex].style.visibility = "visible";
+                _this.raceArr[beforeIndex].style.visibility = "hidden";
 
-        /*图片背景*/
-        backgroundImg : null,
-
-        init: function () {
-            if(this.disposable){
-                this.disposable = false;
-                var index = Math.floor(Math.random() * gameImg.length );
-               // this.src = imgArr[index];
-                this.backgroundImg = gameImg[index]
-            }
-            var img = this.backgroundImg; /*new Image();
-            img.src = this.src;*/
-            if(this.started){
-                this.showImages(img);
-            }else{
-                ctx.drawImage(img,this.positionX,this.positionY);
-            }
-        },
-
-        showImages : function (img) {
-            var _this = this;
-            var img = img;
-            if(_this.getImageObj){
-                _this.randomArry();
-                var result = [];
-                for(var i = 0; i < _this.arrDiv.length;i++ ){
-                    var left = _this.arrDiv[i] % 3 * _this.imgWidth / 3;
-                    var top = Math.floor( _this.arrDiv[i] / 3 ) * _this.imgHeight / 3;
-                    var left1 = i % 3 * _this.imgWidth / 3;
-                    var top1 = Math.floor( i / 3 ) * _this.imgHeight / 3;
-                    var obj = new Object();
-                    obj.index = i;
-                    obj.top = top;
-                    obj.left = left;
-                    obj.top1 = top1;
-                    obj.left1 =left1;
-                    obj.onBlur0 =  i/1 ? false:true;
-                    obj.onBlur1 = false;
-                    result.push(obj);
-                }
-                for(var i = 0;i < _this.arrDiv.length; i++ ){
-                    var index = _this.arrDiv[i];
-                    _this.arrImageObj.push(result[index]);
-                }
-                _this.getImageObj = false;
-                checkSuccess ()
-            }
-            _this.renderImage(img);
-        },
-
-        randomArry : function(){
-            if(this.canStart){
-                var _this = this;
-                var arr = [0,1,2,3,4,5,6,7,8];
-                while(_this.arrDiv.length < 9){
-                    var index=Math.floor(Math.random()*arr.length);
-                    _this.arrDiv.push(arr.splice(index,1).toString()-0);
-                }
-                _this.canStart = false;
-            }
-        },
-
-        renderImage : function (img) {
-            var _this = this;
-            for(var i = 0; i < _this.arrImageObj.length;i++){
-                var left1 = _this.arrImageObj[i].left1;
-                var top1 = _this.arrImageObj[i].top1;
-                var top = _this.arrImageObj[i].top;
-                var left = _this.arrImageObj[i].left;
-                ctx.drawImage(img,left1,top1,_this.imgWidth/3,_this.imgHeight/3,_this.positionX + left,_this.positionY + top,_this.imgWidth/3,_this.imgHeight/3 );
-            };
-            _this.renderTranslate();
-        },
-
-       
-        renderTranslate : function () {
-            var _this = this;
-            for(var i = 0; i < _this.arrImageObj.length;i++){
-                var canRender = _this.arrImageObj[i].onBlur0;
-                var canSelected = _this.arrImageObj[i].onBlur1;
-                var left1 = _this.arrImageObj[i].left1;
-                var top1 = _this.arrImageObj[i].top1;
-                var top = _this.arrImageObj[i].top;
-                var left = _this.arrImageObj[i].left;
-
-                if(canRender){
-                    ctx.drawImage(transitionImg,_this.positionX + left,_this.positionY + top);
-                }
-                if(canSelected){
-                    //ctx.drawImage(img,left1,top1,_this.imgWidth/3,_this.imgHeight/3,_this.positionX + left,_this.positionY + top,_this.imgWidth/3,_this.imgHeight/3 );
-                    ctx.drawImage(selectedImg,_this.positionX + left,_this.positionY + top);
-                }
-            }
-        },
-        moveLeft : function () {
-            var _this = this;
-            if(!_this.canClickMove){
-                return;
-            }
-            var currentId ;
-            for(var i = 0 ; i < _this.arrImageObj.length; i++ ){
-               if(_this.arrImageObj[i].onBlur0){
-                    if(_this.arrImageObj[i].left > 0){
-                        currentId = _this.arrImageObj[i];
-                    }else{
-                        return;
-                    }
-                }
-            }
-            
-
-            if(!currentId){
-                for(var i = 0; i < _this.arrImageObj.length; i++ ){
-                    if(_this.arrImageObj[i].onBlur1 && _this.arrImageObj[i].left > 0){
-                        currentId = _this.arrImageObj[i];
-                    }
-                }
-            }
-
-           if(currentId){
-                for(var i = 0; i < _this.arrImageObj.length; i++ ){
-                    if(currentId.top == _this.arrImageObj[i].top && currentId.left - _this.imgWidth /3 == _this.arrImageObj[i].left ){
-                        //_this.arrImageObj[i].onBlur0 = false;
-                        if(!_this.arrImageObj[i].onBlur1){
-                           _this.arrImageObj[i].onBlur0 = true;
-                       }
-                        currentId.onBlur0 = false;
-                    }
-                }
-            }
-        },
-      
-        moveRight : function () {
-            var _this = this;
-            if(!_this.canClickMove){
-                return;
-            }
-            var currentId ;
-            for(var i = 0 ; i < _this.arrImageObj.length; i++ ){
-               /* if(_this.arrImageObj[i].onBlur0 && _this.arrImageObj[i].left < _this.imgWidth/3 *2){
-                    currentId = _this.arrImageObj[i];
-                }*/
-                if(_this.arrImageObj[i].onBlur0){
-                    if(_this.arrImageObj[i].left < _this.imgWidth/3 *2){
-                        currentId = _this.arrImageObj[i];
-                    }else{
-                        return ;
-                    }
-                }
-            }
-            if(!currentId){
-                for(var i = 0; i < _this.arrImageObj.length; i++ ){
-                    if(_this.arrImageObj[i].onBlur1 && _this.arrImageObj[i].left < _this.imgWidth/3 *2){
-                        currentId = _this.arrImageObj[i];
-                    }
-                }
-            }
-            if(currentId){
-                for(var i = 0; i < _this.arrImageObj.length; i++ ){
-                    if(currentId.top == _this.arrImageObj[i].top && currentId.left == (_this.arrImageObj[i].left/1 - _this.imgWidth /3) ){
-                        //_this.arrImageObj[i].onBlur0 = true;
-                        //_this.arrImageObj[i].onBlur0 = false;
-                        if(!_this.arrImageObj[i].onBlur1){
-                            _this.arrImageObj[i].onBlur0 = true;
-                        }
-                        currentId.onBlur0 = false;
-                    }
-                }
-            }
-        },
-
-        moveUp : function () {
-            var _this = this;
-            if(!_this.canClickMove){
-                return;
-            }
-            var currentId ;
-            for(var i = 0 ; i < _this.arrImageObj.length; i++ ){
-               /* if(_this.arrImageObj[i].onBlur0 && _this.arrImageObj[i].top > 0){
-                    currentId = _this.arrImageObj[i];
-                }*/
-
-                if(_this.arrImageObj[i].onBlur0 ){
-                    if( _this.arrImageObj[i].top > 0){
-                        currentId = _this.arrImageObj[i];
-                    }else {
-                        return;
-                    }
-
-                }
-            }
-            if(!currentId){
-                for(var i = 0; i < _this.arrImageObj.length; i++ ){
-                    if(_this.arrImageObj[i].onBlur1 && _this.arrImageObj[i].top > 0){
-                        currentId = _this.arrImageObj[i];
-                    }
-                }
-            }
-            if(currentId){
-                for(var i = 0; i < _this.arrImageObj.length; i++ ){
-                    if(currentId.left == _this.arrImageObj[i].left && currentId.top == (_this.arrImageObj[i].top/1 + _this.imgHeight / 3) ){
-                        //_this.arrImageObj[i].onBlur0 = false;
-                        if(!_this.arrImageObj[i].onBlur1){
-                            _this.arrImageObj[i].onBlur0 = true;
-                        }
-                        currentId.onBlur0 = false;
-                    }
-                }
-            }
-        },
-      
-        moveDown : function () {
-            var _this = this;
-            if(!_this.canClickMove){
-                return;
-            }
-            var currentId ;
-            for(var i = 0 ; i < _this.arrImageObj.length; i++ ){
-                /*if(_this.arrImageObj[i].onBlur0 && _this.arrImageObj[i].top < _this.imgHeight / 3 * 2){
-                    currentId = _this.arrImageObj[i];
-                }*/
-                if(_this.arrImageObj[i].onBlur0){
-                    if( _this.arrImageObj[i].top < _this.imgHeight / 3 * 2){
-                        currentId = _this.arrImageObj[i];
-                    }else {
-                        return;
-                    }
-                }
-            }
-            if(!currentId){
-                for(var i = 0; i < _this.arrImageObj.length; i++ ){
-                    if(_this.arrImageObj[i].onBlur1 && _this.arrImageObj[i].top < _this.imgHeight / 3 * 2){
-                        currentId = _this.arrImageObj[i];
-                    }
-                }
-            }
-            if(currentId){
-                for(var i = 0; i < _this.arrImageObj.length; i++ ){
-                    if(currentId.left == _this.arrImageObj[i].left && currentId.top == (_this.arrImageObj[i].top/1 - _this.imgHeight / 3) ){
-                        _this.arrImageObj[i].onBlur0 = false;
-                        if(!_this.arrImageObj[i].onBlur1){
-                            _this.arrImageObj[i].onBlur0 = true;
-                        }
-
-                        currentId.onBlur0 = false;
-                    }
-                }
-            }
-        },
-        /*点击事件*/
-        clickOk : function () {
-            var _this = this ;
-            if(!_this.canClickMove){
-                return;
-            }
-            var currentId ;
-            var beforeId;
-
-            for(var i = 0 ; i < _this.arrImageObj.length; i++ ){
-                if(_this.arrImageObj[i].onBlur1){
-                    currentId = _this.arrImageObj[i];
-                }
-            }
-
-            if(!currentId){
-                for(var i = 0 ; i < _this.arrImageObj.length; i++ ){
-                    if(_this.arrImageObj[i].onBlur0 && !_this.arrImageObj[i].onBlur1){
-                         _this.arrImageObj[i].onBlur1 = true;
-                         _this.arrImageObj[i].onBlur0 = false;
-                    }else if(_this.arrImageObj[i].onBlur0 && _this.arrImageObj[i].onBlur1){
-                        _this.arrImageObj[i].onBlur1 = false;
-                        _this.arrImageObj[i].onBlur0 = true;
-                    }
-                }
-            }else{
-                for(var i = 0 ; i < _this.arrImageObj.length; i++ ){
-                     if( _this.arrImageObj[i].onBlur0){
-                        beforeId =  _this.arrImageObj[i];
-                     }
-                 }
-                if(!beforeId){
-                    currentId.onBlur0 = true;
-                    currentId.onBlur1 = false;
+                if(nowIndex >= 3 && nowIndex <= 5){
+                    document.getElementById("race_lamp").style.visibility = "visible";
                 }else{
-                    changeImage (currentId,beforeId)
+                    document.getElementById("race_lamp").style.visibility = "hidden";
                 }
+                pointerShow ('racePointer',index);
+                pointerShow ('race_flog',index);
+
+            }else{
+                clearInterval(_this.raceTimer);
+
+                pointerHide("race");
+                _this.raceArr[0].style.visibility = "visible";
+                pointerHide("racePointer");
+                pointerHide("race_flog");
+                document.getElementById("race_flog").getElementsByTagName("img")[1].style.visibility = "visible";
+                document.getElementById("race_lamp").style.visibility = "hidden";
+
             }
-        }
+            index++;
+        },200)
+    }
+    animate.clearRace = function () {
+        this.raceBoolean = false;
     }
 
-    function changeImage (currentId,beforeId) {
-        startGameBackgroundImg.canClickMove = false;
-        var step = 10;
+
+    animate.gameBoolean = false;
+    animate.gameTimer = null;
+    animate.gameLoop = function () {
+        var _this = this;
         var index = 0;
-        var Xper = (currentId.left - beforeId.left)/step;
-        var YPer = (currentId.top - beforeId.top)/step;
-        var top0 = currentId.top;
-        var top1 = beforeId.top;
-        var left0 = currentId.left;
-        var left1 = beforeId.left;
-        var index0 = currentId.index;
-        var index1 = beforeId.index;
-        currentId.index = index1;
-        beforeId.index = index0;
-        var timer = setInterval(function() {
-            if(index < step){
-                currentId.left += -Xper;
-                currentId.top += -YPer;
-                beforeId.left += Xper;
-                beforeId.top += YPer;
+        _this.gameTimer = setInterval(function () {
+            if(_this.gameBoolean){
+                pointerShow ("gamePointer",index)
+
             }else{
-                clearInterval(timer);
-                currentId.onBlur1 = false;
-                currentId.left = left1;
-                beforeId.left = left0;
-                currentId.top = top1;
-                beforeId.top = top0;
-                startGameBackgroundImg.canClickMove = true;
-                checkSuccess();
+                clearInterval(_this.gameTimer);
+                pointerHide ("gamePointer")
             }
             index ++;
-        },100)
+        } ,200)
     }
-
-    function checkSuccess () {
-        var target = [0,1,2,3,4,5,6,7,8];
-        var result = [];
-        for(var i = 0 ; i < startGameBackgroundImg.arrImageObj.length; i++){
-            result.push(startGameBackgroundImg.arrImageObj[i].index);
-        }
-        if(target.toString() == result.toString() ){
-            //console.log("success!")
-            //window.location.href = "";
-            if(successOrFail){
-                successOrFail = false;
-            }
-            startGameBackgroundImg.disposable = true;
-            startGameBackgroundImg.getImageObj = true;
-            startGameBackgroundImg.arrImageObj = [];
-        }
+    animate.clearGame = function () {
+        this.gameBoolean = false;
     }
 
 
-
-    var startBtn = {
-        totalTimer : 60,
-        positionX : 100,
-        positionY :550,
-        positionX1 : 95,
-        positionY1 : 540,
-        img0 : "./image/btnStart0.png",
-        img1 : "./image/btnStart1.png",
-        img2 : "./image/btnStart2.png",
-        selected : "./image/btnBorder.png",
-        init : function (conter) {
-            if(startGameBackgroundImg.started){
-                this.startGame(conter);
+    animate.dragonBoolean = false;
+    animate.dragonTimer = null;
+    animate.dragonLoop = function () {
+        var _this = this;
+        var index = 0
+        _this.dragonTimer = setInterval( function () {
+            if(_this.dragonBoolean){
+                loopImage("dragon",index);
+                pointerShow("dragonPointer",index);
             }else{
-                this.ready();
+                clearInterval(_this.dragonTimer);
+                pointerHide ("dragon");
+                pointerHide ("dragonPointer");
             }
-        },
-
-        ready : function () {
-            var img1 = new Image();
-            img1.src = this.selected;
-            ctx.drawImage(btnImgArr[0],this.positionX,this.positionY);
-            ctx.drawImage(btnBorder,this.positionX1,this.positionY1);
-        },
-        startGame : function (conter) {
-            var  index  = Math.floor( conter / 20);
-            if(index <= this.totalTimer && this.totalTimer - index < 10 && this.totalTimer - index >= 0){
-                ctx.drawImage(btnImgArr[2],this.positionX,this.positionY);
-                timerCounter.init(index);
-            }else if(index < this.totalTimer){
-                ctx.drawImage(btnImgArr[1],this.positionX,this.positionY);
-                timerCounter.init(index);
-            }else {
-                if(successOrFail){
-                    successOrFail = false;
-                }
-                timerCounter.init(60);
-                ctx.drawImage(btnImgArr[2],this.positionX,this.positionY);
-            }
-        }
+            index ++;
+        } ,200)
+    }
+    animate.clearDragon = function () {
+        this.dragonBoolean = false;
     }
 
 
-    var timerCounter = {
-        positionX1 : 150,
-        positionY1 : 570,
-        positionX2 : 180,
-        positionY2 : 570,
-        init : function (index) {
-            var time = startBtn.totalTimer - index;// Math.abs( time - startBtn.totalTimer );
-            var string =  time < 10 ? "0" + time : time + "";
-            var index1 = string.charAt(0);
-            var index2 = string.charAt(1);
-            ctx.drawImage(timeImgArr[index1],this.positionX1,this.positionY1);
-            ctx.drawImage(timeImgArr[index2],this.positionX2,this.positionY2);
-        }
-    }
-
-
-
-    /*********canvas 主程序 *********/
-    function startEngine(){
-        setInterval(function(){
-
-            if(!process == 100){
+    animate.islandBoolean = false;
+    animate.islandTimer = null;
+    animate.islandLoop = function () {
+        var _this = this;
+        var index = 0;
+        _this.islandTimer = setInterval(function () {
+            if(_this.islandBoolean){
+                loopImage ("islandPointer",index);
+                loopImage ("island",index);
+                loopImage("boat",index);
 
             }else{
-                ctx.clearRect(0,0,1280,720);
-                ctx.drawImage(backgroundImg,0,0);
-                startGameBackgroundImg.init();
-                loopPerson.loop(startGameCounter);
-                startBtn.init(startGameCounter);
-                startGameCounter ++;
+                clearInterval(_this.islandTimer);
+                pointerHide ("islandPointer");
+                pointerHide ("island");
+                pointerHide ("boat");
+                document.getElementById("boat").getElementsByTagName("img")[0].style.visibility = "visible";
+                document.getElementById("island").getElementsByTagName("img")[0].style.visibility = "visible";
             }
+            index ++ ;
 
-
-        }, 50); //每一秒动24次
-    }
-    startEngine();
-
-
-    document.onkeydown = function (e) {
-        var code = e.keyCode;
-        switch (code){
-            case 37:
-                moveLeft();
-                break;
-            case 39:
-                moveRight();
-                break;
-            case 38:
-                moveUp();
-                break;
-            case 40:
-                moveDown();
-                break;
-            case 13:
-                clickOk();
-                break;
-        }
+        } ,200)
+    };
+    animate.clearIsland = function () {
+        this.islandBoolean = false;
     }
 
-    function moveLeft () {
-        if(startGameBackgroundImg.started){
-            startGameBackgroundImg.moveLeft();
-        }
+
+    function aircraft() {
+        animate.aircraftBoolean = true;
+        animate.loopAircraft();
     }
 
-    function moveRight(){
-        if(startGameBackgroundImg.started){
-            startGameBackgroundImg.moveRight();
-        }
+    function race () {
+        animate.raceBoolean = true;
+        animate.loopRace();
     }
 
-    function moveUp () {
-        if(startGameBackgroundImg.started){
-            startGameBackgroundImg.moveUp();
-        }
+    function game () {
+        animate.gameBoolean = true;
+        animate.gameLoop();
     }
 
-    function moveDown () {
-        if(startGameBackgroundImg.started){
-            startGameBackgroundImg.moveDown();
-        }
+    function dragon () {
+        animate.dragonBoolean = true;
+        animate.dragonLoop();
     }
 
-    function clickOk () {
-        if(startGameBackgroundImg.started){
-            startGameBackgroundImg.clickOk();
+    function island () {
+        animate.islandBoolean = true;
+        animate.islandLoop();
+    }
+
+
+
+    function pointerShow (id,index) {
+        var arr = document.getElementById(id).getElementsByTagName('img');
+        if(index % 2){
+            arr[0].style.visibility = "visible";
+            arr[1].style.visibility = "hidden";
         }else{
-            startGameBackgroundImg.started = true;
-            startGameCounter = 0;
+            arr[1].style.visibility = "visible";
+            arr[0].style.visibility = "hidden";
         }
     }
-/**********************************对图片进行加载**************************************/
 
+    function pointerHide (id) {
+        var arr = document.getElementById(id).getElementsByTagName('img');
+        for(var i = 0; i < arr.length; i++){
+            arr[i].style.visibility = 'hidden';
+        }
+    }
+
+    function loopImage (id,index) {
+        var arr = document.getElementById(id).getElementsByTagName('img');
+        var beforeIndex ;
+        var nowIndex = index % arr.length;
+        beforeIndex = nowIndex ? nowIndex - 1 : arr.length - 1;
+        arr[nowIndex].style.visibility = "visible";
+        arr[beforeIndex].style.visibility = "hidden";
+    }
 
 
 </script>
+
 </body>
 </html>
+  	

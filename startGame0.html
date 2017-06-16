@@ -1,0 +1,472 @@
+<!--
+<%@ page contentType="text/html;charset=utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>-->
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head >
+    <title>this is a startGame</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="page-view-size" content ="1280*720" />
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            outline: none;
+            text-decoration: none;
+        }
+        .main{
+            position: absolute;
+            width: 1280px;
+            height: 720px;
+            margin: 0px;
+            padding: 0px;
+            top: 0px;
+            left: 0px;
+            overflow: hidden;
+            background: url("./image/startGame/background.jpg");
+        }
+
+        div{
+            position: absolute;
+            top:0px;
+            left:0px;
+        }
+
+    </style>
+
+</head>
+<body>
+<div  class="main">
+
+    <div id="person0" style="position: absolute;top:72px;left:36px;width:187px;height: 175px;">
+        <img src="./image/startGame/person/0.png" style="position: absolute;top:0px;left:0px;visibility: visible;" alt="">
+        <img src="./image/startGame/explode/1.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/2.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/add.png" style="position: absolute;top:-50px;left:40px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/3.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/4.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/5.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+    </div>
+
+    <div id="person1" style="position: absolute;top:180px;left:196px;width:187px;height: 175px;">
+        <img src="./image/startGame/person/1.png" style="position: absolute;top:0px;left:0px;visibility: visible;" alt="">
+        <img src="./image/startGame/explode/1.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/2.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/add.png" style="position: absolute;top:-50px;left:40px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/3.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/4.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/5.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+    </div>
+
+    <div id="person2" style="position: absolute;top:112px;left:438px;width:187px;height: 175px;">
+        <img src="./image/startGame/person/2.png" style="position: absolute;top:0px;left:0px;visibility: visible;" alt="">
+        <img src="./image/startGame/explode/1.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/2.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/add.png" style="position: absolute;top:-50px;left:40px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/3.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/4.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/5.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+    </div>
+
+    <div id="person3" style="position: absolute;top:140px;left:630px;width:187px;height: 175px;">
+        <img src="./image/startGame/person/3.png" style="position: absolute;top:0px;left:0px;visibility: visible;" alt="">
+        <img src="./image/startGame/explode/1.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/2.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/add.png" style="position: absolute;top:-50px;left:40px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/3.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/4.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/5.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+    </div>
+
+    <div id="person4" style="position: absolute;top:208px;left:810px;width:187px;height: 175px;">
+        <img src="./image/startGame/person/4.png" style="position: absolute;top:0px;left:0px;visibility: visible;" alt="">
+        <img src="./image/startGame/explode/1.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/2.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/add.png" style="position: absolute;top:-50px;left:40px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/3.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/4.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/5.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+    </div>
+
+    <div id="person5" style="position: absolute;top:129px;left:1064px;width:187px;height: 175px;">
+        <img src="./image/startGame/person/5.png" style="position: absolute;top:0px;left:0px;visibility: visible;" alt="">
+        <img src="./image/startGame/explode/1.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/2.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/add.png" style="position: absolute;top:-50px;left:40px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/3.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/4.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+        <img src="./image/startGame/explode/5.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+    </div>
+
+
+    <div id="aircraft" style="width: 170px;height: 170px;position: absolute;top:548px;left:170px;">
+        <img src="./image/startGame/airplane0.png" style="position: absolute;top:0px;left:0px;visibility: visible;" alt="">
+        <img src="./image/startGame/airplane1.png" style="position: absolute;top:0px;left:0px;visibility: hidden;" alt="">
+    </div>
+
+    <div id="bullet" style="width: 36px;height: 54px;position: absolute;top:500px;left:20px;">
+        <img src="./image/startGame/bullet.png" style="visibility: hidden;" alt="">
+    </div>
+
+    <div id="score" style="width: 100px;height: 36px;position: absolute;top:49px;left:811px;">
+        <img src="./image/startGame/score/0.png" style="position: absolute;top:0px;left: 0px;" alt="">
+        <img src="./image/startGame/score/0.png" style="position: absolute;top:0px;left: 22px;" alt="">
+        <img src="./image/startGame/score/0.png" style="position: absolute;top:0px;left: 44px;" alt="">
+        <img src="./image/startGame/score/0.png" style="position: absolute;top:0px;left: 66px;" alt="">
+    </div>
+
+    <div id="time" style="width: 100px;height: 36px;position: absolute;top: 51px;left: 645px;">
+        <img src="./image/startGame/time/3.png" style="position: absolute;top:0px;left: 0px;" alt="">
+        <img src="./image/startGame/time/0.png" style="position: absolute;top:0px;left: 22px;" alt="">
+    </div>
+
+</div>
+
+<script type="text/javascript" src="./js/common1_1.js"></script>
+<script type="text/javascript" src="./js/keydown1.js"></script>
+<script type="text/javascript">
+/******************************对接数据*********************************/
+    function challengeFailure () {
+        /*分数未达到，跳转挑战失败页面*/
+         window.location.href = "";
+    }
+
+    function goToLottery () {
+        /*跳转抽奖页面*/
+        window.location.href = "";
+    }
+
+   var  targetScore = 140; //设置目标分数，当分数大于等于目标分数，跳转抽奖页面，否则跳转挑战失败页面
+
+/******************************对接数据*********************************/
+
+
+    var loopImageArr = [];
+    var ipPosition = [[36,72],[196,180],[438,112],[630,140],[810,208],[1064,129]];
+    var scoreArr = document.getElementById("score").getElementsByTagName("img");
+    var timeCountArr = document.getElementById("time").getElementsByTagName("img");
+    var timeCount = 30;
+    var totalScore = 0;
+    var engineTimer ;
+    function renderImg(arr,string){
+        for(var i = 0; i < arr.length; i++){
+            arr[i].src = "./image/startGame/score/" + string.charAt(i) + ".png"
+        }
+    }
+    function countdown (index){
+        if(index % 10 == 0){
+            if(timeCount > 0){
+                timeCount --;
+                var middle = timeCount + 100 + "";
+                var temp = middle.slice(1,middle.length);
+                renderImg(timeCountArr,temp);
+            }else{
+               // clearInterval(engineTimer);
+                /*时间结束*/
+                if(totalScore >= targetScore ){
+                    goToLottery();
+                }else{
+                    challengeFailure();
+                }
+
+            }
+        }
+    }
+    /***************************Countdown*****************************************/
+    function loopImage (id){
+        this.id = document.getElementById(id);
+        this.src = '';
+        this.top = 0;//ip top
+        this.left = 0;//ip left;
+        this.width = 187;
+        this.height = 175;
+        this.canExplode = false;
+        this.counter = 0;
+        this.once = true;
+        this.middle = 30;
+        //this.bullet = true;
+    };
+    loopImage.prototype.init = function (index) {
+        if(this.once){
+            this.id.getElementsByTagName("img")[0].style.visibility = "visible";
+            this.once = false;
+            this.counter = 0;
+        }else{
+            this.checkExplode();
+        }
+    };
+    loopImage.prototype.explode = function () {
+        var arr = this.id.getElementsByTagName("img");
+        if(this.canExplode) {
+            this.counter ++;
+            if(this.counter < arr.length ){
+                arr[this.counter].style.visibility = "visible";
+                arr[this.counter - 1].style.visibility = "hidden";
+                arr[0].style.visibility = this.counter <= 3 ? "visible" : "hidden";
+                arr[3].style.visibility = this.counter >3 ? "visible": "hidden";
+            }else {
+                //添加分数
+                totalScore += 20;
+                var MiddleScore = totalScore / 1 + 10000 + '';
+                var middleScore = MiddleScore.slice(1,MiddleScore.length);
+                renderImg(scoreArr,middleScore);
+                var _this = this;
+                arr[3].style.visibility = "hidden";
+                arr[arr.length - 1].style.visibility = "hidden";
+                bullet.leftBorder = _this.left;
+                bullet.rightBorder = _this.left + _this.width;
+                setTimeout(function(){
+                    _this.id.getElementsByTagName("img")[0].src =  "./image/startGame/person/" + Math.floor(Math.random() * 20) + ".png";
+                    _this.canExplode = false;
+                    _this.once = true;
+                    bullet.leftBorder = 0;
+                    bullet.rightBorder = 0;
+                    _this.init();
+                },2000);
+                bullet.waiting = true;
+                /!*结束后的效果*!/
+            }
+        }
+    };
+    loopImage.prototype.checkExplode = function () {
+        this.canExplode = true;
+        bullet.clear = true;
+        this.explode();
+
+    };
+
+    for(var i = 0; i < ipPosition.length;i++ ){
+        var string = "person" + i;
+        var person = new loopImage(string);
+        person.left = ipPosition[i][0];
+        person.top = ipPosition[i][1];
+        loopImageArr.push(person);
+    }
+
+/**********************************************/
+    var startGame = {
+        start : false,//游戏是否开始
+        imgWidth : 170,
+        imgHeight: 170,
+        top : 548,//548
+        left : 477,//极限值 left 0,477,1075 right 172 812 1107
+        // 0 --172  477--812   1075 -- 1107
+        leftBorder : [0,477,1075],
+        canLeft : true,
+        canMove : true,
+        rightBorder : [172,812,1107],
+        upPosition0 : [[170,545],[186,510],[300,454],[420,510],[480,545]],
+        upPosition1 : [[812,545],[830,500],[936,462],[1051,500],[1075,545]],
+        jumpToLeft0 : false,
+        jumpToLeft1 : false,
+        jumpToRight0 : false,
+        jumpToRight1 : false,
+        counter : 0,
+        canRight : true,
+        middleValue : 50,
+        id : document.getElementById("aircraft") ,
+        timer : null,
+
+        init : function (index) {
+            this.id.style.left = this.left + "px";
+            this.id.style.top = this.top + "px";
+            this.loopImg(index);
+        },
+        loopImg : function (index) {
+            var arr = this.id.getElementsByTagName("img");
+            var currentIndex = index % arr.length;
+            var beforeIndex = currentIndex ? currentIndex - 1 : arr.length - 1;
+            arr[currentIndex].style.visibility = "visible";
+            arr[beforeIndex].style.visibility = "hidden";
+            bullet.init(index);
+            airplaneJump (index);
+        },
+
+        moveLeft : function () {
+            if(!this.canMove) return;
+            var _this = this;
+            if(_this.left >= _this.middleValue && _this.left <= _this.rightBorder[0] ||
+                    _this.left >= (_this.leftBorder[1] + _this.middleValue) && _this.left <= _this.rightBorder[1] ||
+                    _this.left >= (_this.leftBorder[2] + _this.middleValue) && _this.left <= _this.rightBorder[2]  ){
+                _this.left -= _this.middleValue;
+            }
+        },
+        moveRight : function () {
+            if(!this.canMove) return;
+            var _this = this;
+            if(_this.left >= 0 && _this.left <= ( _this.rightBorder[0] - _this.middleValue ) ||
+                _this.left >= _this.leftBorder[1] &&  _this.left <= ( _this.rightBorder[1] - _this.middleValue ) ||
+                    _this.left >= _this.leftBorder[2] &&  _this.left <= (_this.rightBorder[2] -_this.middleValue )
+            ){
+                _this.left += _this.middleValue;
+            }
+        },
+        moveUp : function () {
+            if(!this.canMove) return;
+            var _this = this;
+            if(  _this.left >= ( _this.rightBorder[0] - _this.middleValue ) && _this.left < ( _this.rightBorder[0] + 1 *_this.middleValue ) ){
+                //z执行第一个
+                _this.canMove = false;
+               // _this.aircraftJumpToRight(_this.upPosition0);
+                _this.counter = 0;
+                _this.jumpToRight0 = true;
+            }else if(_this.left >= (_this.rightBorder[1] -_this.middleValue) && _this.left < (_this.rightBorder[1]  + 1 * _this.middleValue)){
+                //z执行第er个
+                _this.canMove = false;
+                _this.counter = 0;
+                _this.jumpToRight1 = true;
+            }else if( _this.left >= _this.leftBorder[1] && _this.left <= (_this.leftBorder[1] + _this.middleValue )){
+                //zuo 1
+                _this.canMove = false;
+                _this.counter = _this.upPosition0.length;
+                _this.jumpToLeft0 = true;
+            }else if ( _this.left >= _this.leftBorder[2] && _this.left <= (_this.leftBorder[2] + _this.middleValue )){
+                //zuo 2
+                _this.canMove = false;
+                _this.counter = _this.upPosition1.length;
+                _this.jumpToLeft1 = true;
+            }
+        },
+        aircraftJumpToLeft : function(targetArr) {
+            var _this = this;
+            if(_this.counter){
+                _this.top = targetArr[_this.counter - 1][1];
+                _this.left = targetArr[_this.counter - 1][0];
+            }else{
+                _this.canMove = true;
+                _this.jumpToLeft0 = false;
+                _this.jumpToLeft1 = false;
+            }
+            _this.counter --;
+        },
+        aircraftJumpToRight : function(targetArr) {
+            var _this = this;
+            if(_this.counter < targetArr.length){
+                _this.top = targetArr[_this.counter][1];
+                _this.left = targetArr[_this.counter][0];
+            }else{
+                _this.canMove = true;
+                _this.jumpToRight0 = false;
+                _this.jumpToRight1 = false;
+            }
+            _this.counter ++;
+        }
+    };
+    function airplaneJump (index){
+        if(startGame.jumpToLeft0){
+            startGame.aircraftJumpToLeft(startGame.upPosition0)
+        }
+        if(startGame.jumpToLeft1){
+            startGame.aircraftJumpToLeft(startGame.upPosition1)
+        }
+        if(startGame.jumpToRight0){
+            startGame.aircraftJumpToRight(startGame.upPosition0);
+        }
+        if(startGame.jumpToRight1){
+            startGame.aircraftJumpToRight(startGame.upPosition1);
+        }
+        //allIp (index);
+    }
+    var bullet = {
+        start : false,
+        id : document.getElementById("bullet"),
+        left : 500,
+        top : 450,
+        step : 30,
+        originalTop : 0,
+        hidden : true,
+        clear : false,
+        imgWidth : 36,
+        imgHeight : 54,
+        once : true,
+        canclick : true,
+        //canThrough : true,//用于2秒钟，图片影藏，子弹穿越图片
+        canMove : false,
+        waiting : false,
+        leftBorder : 0,
+        rightBorder : 0,
+
+        init : function (index) {
+            if(this.once && this.start){
+                this.left = startGame.left + startGame.imgWidth / 2 - this.imgWidth / 2;
+                this.top = startGame.top - this.imgHeight ;
+                this.once = false;
+                this.start = false;
+                this.canclick = false;
+                this.canMove = true;
+                this.clear = false;
+                this.waiting = false;
+                this.id.getElementsByTagName("img")[0].style.visibility = "visible";
+            }else{
+                if(this.canMove) {
+                    this.moveUp();
+                    if(this.left > this.leftBorder && this.left < this.rightBorder ){
+
+                    }else {
+                        this.check(index);
+                    }
+                }
+            }
+            this.id.style.top = this.top + "px";
+            this.id.style.left = this.left + "px";
+        },
+        moveUp : function () {
+            if( this.top - this.step > 0 && !this.clear ){
+                this.top -= this.step;
+            }else if(this.top - this.step <= 0){
+                this.id.getElementsByTagName("img")[0].style.visibility = "hidden";
+                //this.left = startGame.left + startGame.imgWidth / 2 - this.imgWidth / 2;
+                //this.top = startGame.top - this.imgHeight ;
+                this.canclick = true;
+                this.once = true;
+            }else {
+                this.id.getElementsByTagName("img")[0].style.visibility = "hidden";
+                if(this.waiting){
+                    this.once = true;
+                    this.left = startGame.left + startGame.imgWidth / 2 - this.imgWidth / 2;
+                    this.top = startGame.top - this.imgHeight ;
+                    this.canclick = true;
+                }
+            }
+        },
+        check : function (index){
+            var _this = this;
+            if(_this.top < 350){
+                /*开始进行碰撞检测*/
+                for(var i = 0; i < loopImageArr.length; i++){
+                    if(_this.left < loopImageArr[i].left + loopImageArr[i].width - loopImageArr[i].middle - this.imgWidth
+                            && _this.top < loopImageArr[i].top + loopImageArr[i].height - 40
+                            && (_this.left + 20 ) > loopImageArr[i].left && _this.top > loopImageArr[i].top ){
+                        loopImageArr[i].init(index);
+                    }
+                }
+            }
+        }
+    }
+
+/********************************************************************/
+
+    function engine () {
+        var index  = 0;
+        engineTimer = setInterval(function () {
+            startGame.init(index);
+            countdown (index);
+            index ++;
+        } ,100)
+    }
+
+
+    function  fire () {
+        if(!bullet.canclick){return};
+        bullet.start = true;
+    }
+   engine ()
+</script>
+
+</body>
+</html>
+  	
