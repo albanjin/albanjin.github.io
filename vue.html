@@ -1,0 +1,442 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>git命令</title>
+	<style type="text/css">
+		body{background: #333;}
+		*{font-size:18px;font-weight: 600;color: #fff; }
+	</style>
+</head>
+<body>
+
+	<h2>Vue</h2>
+
+	<pre >
+		vue 动态插值
+
+	有时我们需要在插值前对数据进行处理，来满足我们的需求，Vue为我们提供了动态插值语法，允许我们在插值前调用一个函数来处理我们的数据。
+
+	这些动态的函数要定义在一个computed属性中，属性值是一个对象
+
+		属性名表示一个插值变量（可以在插值语法中使用）
+		属性值表示一个函数
+			参数有一个就是vue实例化对象
+			作用域是vue实例化对象
+			因此在这个函数中我们想使用vue实例化对象的凡是有两种方式
+				1.通过this
+				2.通过传参
+			返回值就是插入视图中的数据，所以一定要设置返回值
+
+
+数据的双向绑定
+	可以通过v-model指令实现实现视图到模型的一个数据传递
+		原理：
+			通过vue的data属性实现数据到vue的一个绑定，此时数据更新会呗vue监听渲染给视图
+
+	* input 获取当前是的值 
+		1、通过 this
+		   < input type="text"/>
+			< h1 >< / h1 >
+			$("input").on("change",function () {
+				var val = $(this).val();
+				$("h1").html(val);
+			})
+			
+		2、e.target 获取当前的值
+			$("input").on("change",function (e) {
+				var val = e.target.val();
+				$("h1").html(val);
+			})
+
+	使用vue实现数据的双向绑定
+
+		< input type="text" v-model="msg"/>
+		< h1>{{msg}}< /h1>
+
+		< script type="text/javascript">
+			var app = new Vue({
+				el : "h1",
+				data ： {
+					msg : ""
+				}
+			})
+		< /script>
+
+
+绑定类的三种方式
+	1、通过插值的方式实现绑定
+		这种方式的问题：不是对每一个类单独处理的，因此每一次添加删除一个类不方便
+	2、动态绑定
+		通过v-bind指令，属性值是一个数组
+		语法：V-bind ："[]"
+
+		css 样式：
+			.green{
+				color:green;
+			}
+			.blue{
+				color:blue;
+			}
+			.bg_yellow{
+				background:yellow;
+			}
+
+		html 
+			< div id="app" v-bind:class="[green,blue]">< /div>
+
+		javascript
+			var app = new Vue({
+				data: {
+					green : "green",
+					blue : "blue"
+				}
+			})
+
+
+
+		* 注意：
+				1、这是一个js环境，所以数组每个成员是变量，一旦加上引号就将变量转化成字符串了，不需要通过js变量直接引用
+				2、两种方式不能混合使用
+				3、数组的每一个成员只能代表一个类（每个成员值不能出现空格）
+
+	3、动态绑定 v-bind指令，属性值是一个对象
+		语法 v-bind ："{}"
+		也是一个js环境这里的{}表示一个对象
+			对象中的每个属性代表一个类名
+			属性值只能是布尔值
+			TRUE 表示保留这个类名
+			false 表示删除这个类名
+
+		html 
+			< div id="app" v-bind:class="{green:true,blue:true,'bg_yellow':bgYellow}">< /div>
+
+		< script type="text/javascript">
+			var app = new Vue({
+				data:{
+					"bgYellow":ture
+				}
+			})
+		< /script>
+
+		* 注意：出现特殊字符（"-"）,一定要加上引号，否则就是一个不合法的对象属性
+
+	三种绑定类的样式只能使用一种！
+
+
+样式的三种绑定方式
+	1、插值方式、插入在style属性中，是行内样式，是三种css样式中权值最高的
+		一种插入全部样式的字符串
+		一种插入部分样式的字符串
+		渲染原理：字符串
+	eg: 
+		html : 
+			< div id="app" style="{{style}}">随便什么< /div>
+
+		javascript 
+			var app = new Vue({
+				el:"#app",
+				data : {
+					style : "color :red;font-size : 40px;"
+				}
+			})
+
+	2.动态绑定 v-bind:style ="[]";
+		绑定样式是，数组的每个成员代表一个样式对象，属性名称要驼峰命名，
+		通常样式对象定义在数组的模型中，也可以以直接在属性中定义对象
+		eg: 
+
+			html : 
+				< div id="app" v-bind:style="[font,bg,{border: '1px solid #333'}]">随便什么< /div>
+
+			javascript 
+				var app = new Vue({
+					el:"#app",
+					data : {
+						font : {
+							fontSize:"40px";
+							color:"blue"
+						},
+						bg : {
+							background:"red"
+						}
+
+					}
+				})
+
+	3、动态绑定v-bind:style='{}'
+		绑定样式时
+			对象的属性名称（key）表示css的属性名称
+				* 若key 形如 font-size 可以使用驼峰命名，或者使用"font-size";否则语法问题
+			对象的属性值（value）表示css 的样式属性值
+
+			eg: 
+
+			html : 
+				< div id="app" v-bind:style="{border: '1px solid #333',fontSize : fz}">随便什么< /div>
+
+			javascript 
+				var app = new Vue({
+					el:"#app",
+					data : {
+						font : {
+							fontSize:"40px";
+							color:"blue"
+						},
+						bg : {
+							background:"red"
+						},
+
+						fz : '40px'
+
+					}
+				})
+
+	三种不能混合使用
+
+
+css3 盒子模型 
+	display : flex;
+	display : -moz-flex;
+	display : -webkit-flex;
+	display : -O-flex;
+	
+	参考详情--网址：http://www.runoob.com/css3/css3-flexbox.html
+
+
+ vue 的if模板指令
+ 	在vue中动态渲染一个元素，可以通过v-if指令实现
+ 		v-if是一个指令，因此他的值是一个js环境，所以可以使用vue提供变量
+ 		v-if 的属性值是TRUE，此时会将这个元素渲染到页面
+ 		v-if的属性值是false，此时会将这个元素从页面中删除
+	eg ： 
+		html
+		< div id="app">
+			< h1>
+				< span v-if="type">{{type}} |< /span>
+				< strong>{{content}}< /strong>
+			< /h1>
+		< /div>	
+
+		javascript:
+
+		var app = new Vue({
+			el:"#app",
+			data : {
+				type:"热点"，
+				content："广告：碎片时间学英语 广告：挑战美国名校"
+			}
+		});
+
+template v-if 指令
+	template 是vue中的特殊的自定义属性
+	* 注意在渲染页面时候，这个元素会被删除，所以通过这个元素可以控制多个兄弟元素的渲染
+
+	html:
+	< div id="app">	
+		< h1>
+			< template v-if="type">
+		     	< span>{{type}}< /span>
+		     	< span>  |< /span>
+	     	< /template>
+	     	< strong>{{content}}< /strong>
+		< /h1>
+	< /div>
+     
+    javascript:
+    	var app = new Vue({
+    		el :'#app',
+    		data : {
+    			type:"this is a boolean",
+    			content:"Please fill something in！"
+    		}
+    	})
+
+
+v-for指令
+	
+	语法 v-for='item in list'
+		item 是v-for循环定义的一个局部变量
+		list 是我们提供的模型数据，每一个成员将保留在item，在指令的元素内，我们可以通过item访问每一个成员的属性
+
+	若v-for 指令添加到template元素上，将渲染一组元素
+
+		这是将弹性盒子和vue v-for联合的例子
+		css样式：
+		    *{
+		        list-style: none;
+		        margin: 0px;
+		        padding: 0px;
+		        outline: none;
+		    }
+	       .flex-box{
+	            display: flex;
+	            display: -webkit-flex;
+	            width: 550px;
+	            height: 250px;
+
+	       }
+	       .flex-item{
+	            background: red;
+	            width: 120px;
+	            height: 200px;
+	            margin: auto;
+	       }
+ 
+       html
+			< div id="app">
+			    < ul class="flex-box">
+			        < li class="flex-item"  v-for="item in list">{{item}}< /li>
+			    < /ul>
+			< /div>
+
+		 < script type="text/javascript" src="./js/vue.js">< /script>
+		 < script type="text/javascript">
+		    var data = [
+		            "一切事物皆对象，(tips: javascript 中除了两个特殊值undefined 和 null.)", 
+		            "对象具有封装和继承特性", 
+		            "对象与对象之间使用消息通信，各自存在信息隐藏",
+		            "这个是利用了vue实时对数据进行更新"
+		            ]; 
+
+		    var app = new Vue({
+		        el:'#app',
+		        data:{
+		           list: data
+		        }
+		     });
+
+
+    表单元素
+    	多选 type="checkbox";
+    	在vue中，我们可以对多选实现双向绑定，通过添加v-model指令绑定一个变量
+    	变量值是一个Boolean
+    		TRUE表示选中，
+    		false表示未选中
+    			*
+    				1、在多选中设置值的具体内容，我们可以使用绑定true-value 和 false-value 只是对更改时候进行数据的更改，初始化不能进行修改原始数据
+    				2、多选矿的选中还可以通过html标签的checked属性来表示，此时的优先级高于绑定的数据属性值
+
+    	eg:
+    		< div id="app">
+			    < span>选择号码< /span>
+			    < label for="M">M< /label> < input type="checkbox" name="" id="M" v-model="size.M" v-if="">
+			    < label for="L">L< /label> < input type="checkbox" name="" id="L"
+			    v-model="size.L">
+			    < label for="XL">XL< /label> < input type="checkbox" name="" id="XL"
+			    v-model="size.XL">
+			    < !-- 在多选中设置值的具体内容，我们可以使用绑定true-value 和 false-value -->
+			    < label for="mail">mail< /label> < input type="checkbox" name="" id="mail" v-model="size.mail" v-bind:true-value="'包邮'" v-bind:false-value="notFree">
+			    < h3>{{size | json}}< /h3>
+			< /div>
+		 < script type="text/javascript" src="./js/vue.js">< /script>
+		 < script type="text/javascript">
+		    var app = new Vue({
+		        el:'#app',
+		        data:{
+		           size:{
+		                M:false,
+		                L:false,
+		                XL:false,
+		                mail:false
+		           },
+		           notFree:"不包邮"
+		        }
+		     });
+		 < /script>
+
+ 
+下拉框
+	通过添加v-model属性是vue实例化对象与视图实现绑定
+	v-model 的值表示选中的那个选项（option）
+	option 的默认值是其内容
+	如果设置了value属性，他的值就是value值，会覆盖内容值
+	想实现多选下拉框，只需要在select上添加multiple属性，此时单选下拉框就变成了一个多选下拉框，此时绑定的vue值是一个数组，数组的值就是默认选中的选项
+	eg:
+		< div id="app">
+		    < select v-model="mail" multiple>
+		        < option value="sina">@sina< /option>
+		        < option value="qq">@qq.com< /option>
+		        < option value="163">@163< /option>
+		        < option value="126">@126< /option>
+		    < /select>
+	    	< p>{{plus()}}< /p>
+		< /div>
+		 < script type="text/javascript" src="./js/vue.js">< /script>
+		 < script type="text/javascript">
+		    var app = new Vue({
+		        el:'#app',
+		        data:{
+		           mail : ["126","qq"]//或者是数组
+		        },
+		        methods: {
+		            plus: function () {
+		              return this.mail.join("");
+		            }
+		        }
+
+		     });
+
+
+单选框
+	type="radio";
+	在vue中，我们可以通过单选框实现双向绑定，通过添加v-model指令绑定一个变量
+	此时，我们可以忽略name属性
+	v-model绑定的变量值是谁，就会选中谁
+	但是我们可以通过checked属性进行修改，且checked的优先级较高
+	在但选中，必须要设置的value属性，表示选中的值
+
+	eg ：
+		< div id="app">
+	        < label for="man">男< /label>
+	        < input v-model="sex" type="radio" name="man" id="man" value="man">
+	        < br>
+
+	        < label for="woman">woman< /label>
+	        < input v-model="sex" type="radio" name="woman" id="woman" value='woman'>
+	        < br>
+
+	        < label for="other">other< /label> 
+	        < input v-model="sex" type="radio" name="other" id="other" value="other">
+	        < br>
+	        < h2>{{sex}}< /h2>
+    
+		< /div>
+		 < script type="text/javascript" src="./js/vue.js">< /script>
+		 < script type="text/javascript">
+		    var app = new Vue({
+		        el:'#app',
+		        data:{
+		            sex : ''
+		        }
+		     });
+		 < /script>
+
+
+    单选框与多选框的差别
+    	1、单选框中必须通过value来设置他的值，多选中没有意义
+    	2、在多选择，v-bind:true-value 和v-bind：false-value 来设置选中时候的值和未选中的值，在但选中是没有意义的
+    	3、多选框中每一个选项框要绑定一个单独的变量，通常这些变量会放在一个对象内，单选框中所有的单选框都要绑定在一个变量中
+    相同点：
+    	不论是单选框还是多选框，都可以通过checked属性表示选中状态，并且checked的优先级高于绑定数据的优先级
+
+
+
+* 补充
+	cmd 命令 rmdir 删除文件
+		/s 是代表删除所有子目录跟其中的档案。 
+		/q 是不要它在删除档案或目录时，不再问我 Yes or No 的动作。 
+	eg ： 
+		rmdir /s/q d:\123\abc
+
+		把磁盘驱动器 D 的123资料夹里面的abc资料夹中的所有东西全部删除，同时也不要再问我是否要删除。
+
+
+vue-cil + webpack 运行
+
+npm run dev
+
+	</pre>
+
+</body>
+</html>
