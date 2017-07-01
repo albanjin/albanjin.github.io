@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>笔记</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="page-view-size" content ="1280*720" />
+    <style type="text/css">
+          *{
+               color: #fff;
+               font-weight: 700;
+               font-size: 20px;
+          }
+          body{
+               background: #333;
+          }
+          .none{
+               display: none;
+          }
+    </style>
+</head>
+     
+<body>
+
+
+<div class="main">
+     <h3 class="arr"><a href="q">数组去重</a></h3>
+     <pre class="q none" style="color: #fff;font-size: 20px;font-weight: 700;">
+      Array.prototype.single = function () { 
+          var _this = this; 
+          var targetArr = []; 
+          var index = 0; 
+          do{
+               if(targetArr.length){
+                    for(var i = 0 ;i < _this.length; i++){
+                         var boolean = true; 
+                         for(var j =0; j < targetArr.length;j++){
+                               if(targetArr[j] == _this[i] ){ boolean = false; } 
+                         } 
+                         if(boolean){
+                              targetArr.push(_this[i]) ;
+                         } 
+                         index ++; 
+                    } 
+               }else { 
+                    targetArr.push(_this[0]); 
+               } 
+
+          }while(index < _this.length) 
+          return targetArr; 
+    }
+     </pre>
+</div>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+     $(".arr").on("click","a",function (e) {
+          e.preventDefault(); 
+          var str ="." + $(this).attr("href")[0];
+          $(str).fadeIn("fast",function(){});
+           
+
+
+
+     })
+</script>
+</body>
+</html>
+
+    
