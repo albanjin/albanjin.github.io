@@ -24,7 +24,7 @@
 
 <div class="main">
      <h3 class="arr"><a href="q">数组去重</a></h3>
-     <pre class="q none" style="color: #fff;font-size: 20px;font-weight: 700;">
+     <pre class="q none" boolean='false' style="color: #fff;font-size: 20px;font-weight: 700;">
       Array.prototype.single = function () { 
           var _this = this; 
           var targetArr = []; 
@@ -55,7 +55,15 @@
      $(".arr").on("click","a",function (e) {
           e.preventDefault(); 
           var str ="." + $(this).attr("href")[0];
-          $(str).fadeIn("fast",function(){});
+          var boolean = $(this).attr('boolean');
+          if(boolean == "true" || boolean == true){
+              $(str).fadeOut("fast",function(){});
+              $(this).attr('boolean',"false");
+          }else{
+              $(str).fadeIn("fast",function(){});
+              $(this).attr('boolean',"true");
+          }
+
            
 
 
