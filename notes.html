@@ -23,7 +23,7 @@
 
 
 <div class="main">
-     <h3 class="arr"><a href="q">数组去重</a></h3>
+     <h3 class="arr"><a href="q">数组去重1</a></h3>
      <pre class="q none" boolean='false' style="color: #fff;font-size: 20px;font-weight: 700;">
       Array.prototype.single = function () { 
           var _this = this; 
@@ -49,6 +49,22 @@
           return targetArr; 
     }
      </pre>
+
+      <h3 class="arr"><a href="q">数组去重2</a></h3>
+     <pre class="q none" boolean='false' style="color: #fff;font-size: 20px;font-weight: 700;">
+      Array.prototype.single = function () { 
+          var _this = this; 
+          var targetArr = [];
+          var obj = new Object(); 
+          for(var i = 0; i < _this.length; i++){
+            if(!obj._this[i]){
+              obj[_this[i]] == 1;
+              targetArr.push(_this[i]);
+            }
+          }
+          return targetArr; 
+    }
+     </pre>
 </div>
 <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
@@ -57,17 +73,15 @@
           var str ="." + $(this).attr("href")[0];
           var boolean = $(this).attr('boolean');
           if(boolean == "true" || boolean == true){
-              $(str).fadeOut("fast",function(){});
+
+              $(this).parent().next().fadeOut("fast",function(){});
               $(this).attr('boolean',"false");
           }else{
-              $(str).fadeIn("fast",function(){});
+              //$(str).fadeOut("fast",function(){});
+              $(this).siblings().parent().next().fadeOut("fast",function(){});
+              $(this).parent().next().fadeIn("fast",function(){});
               $(this).attr('boolean',"true");
           }
-
-           
-
-
-
      })
 </script>
 </body>
