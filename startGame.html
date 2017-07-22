@@ -46,37 +46,35 @@
         }
 
         for(var i = 0;i < 20; i++){
-            (function (i) {
-                var img = new Image();
-                img.src = "./image/game"+ ( i + 1 ) + ".jpg";
-                img.onload = function () {
-                    process += 2;
-                }
-                gameImg.push(img);
-            })(i)
+            var img = new Image();
+            img.src = "./image/game"+ ( i + 1 ) + ".jpg";
+        
+            img.onload = (function (i) {
+                process += 2;
+            } )(i)   
+            
+            gameImg.push(img);
             
         }
 
         for(var i = 0 ; i < 6; i++ ){
-            (function () {
-                var img = new Image();
-                img.src = "./image/"+  i  + ".png";
-                img.onload = function () {
-                    process += 3;
-                }
-                leftPic.push(img);
+            var img = new Image();
+            img.src = "./image/"+  i  + ".png";
+            img.onload = (function (i) {
+                 process += 3;
             })(i)
+            leftPic.push(img); 
         }
 
         for(var i = 0 ; i < 3;i++){
-            (function (i){
-                var img = new Image();
-                img.src = "./image/btnStart" + i + ".png";
-                img.onload = function () {
-                    process += 3;
-                }
-                btnImgArr.push(img);
-            })(i)
+            
+            var img = new Image();
+            img.src = "./image/btnStart" + i + ".png";
+            img.onload = (function (i){
+                process += 3;
+            })(i);
+            btnImgArr.push(img);
+            
         }
 
         btnBorder = new Image();
@@ -86,15 +84,14 @@
         }
 
         for(var i = 0 ; i < 10; i++){
-            (function (i) {
-                var img = new Image();
-                img.src = "./image/timer/" + i + ".png";
-                img.onload = function () {
-                    process += 2;
-                }
-                timeImgArr.push(img);
-            })(i)
             
+            var img = new Image();
+            img.src = "./image/timer/" + i + ".png";
+            img.onload = (function (i) {
+                process += 2;
+            })(i);
+            timeImgArr.push(img);
+ 
         }
 
         dialogueImg = new Image();
