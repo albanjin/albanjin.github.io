@@ -46,30 +46,37 @@
         }
 
         for(var i = 0;i < 20; i++){
-            var img = new Image();
-            img.src = "./image/game"+ ( i + 1 ) + ".jpg";
-            img.onload = function () {
-                process += 2;
-            }
-            gameImg.push(img);
+            (function (i) {
+                var img = new Image();
+                img.src = "./image/game"+ ( i + 1 ) + ".jpg";
+                img.onload = function () {
+                    process += 2;
+                }
+                gameImg.push(img);
+            })(i)
+            
         }
 
         for(var i = 0 ; i < 6; i++ ){
-            var img = new Image();
-            img.src = "./image/"+  i  + ".png";
-            img.onload = function () {
-                process += 3;
-            }
-            leftPic.push(img);
+            (function () {
+                var img = new Image();
+                img.src = "./image/"+  i  + ".png";
+                img.onload = function () {
+                    process += 3;
+                }
+                leftPic.push(img);
+            })(i)
         }
 
         for(var i = 0 ; i < 3;i++){
-            var img = new Image();
-            img.src = "./image/btnStart" + i + ".png";
-            img.onload = function () {
-                process += 3;
-            }
-            btnImgArr.push(img);
+            (function (i){
+                var img = new Image();
+                img.src = "./image/btnStart" + i + ".png";
+                img.onload = function () {
+                    process += 3;
+                }
+                btnImgArr.push(img);
+            })(i)
         }
 
         btnBorder = new Image();
@@ -79,12 +86,15 @@
         }
 
         for(var i = 0 ; i < 10; i++){
-            var img = new Image();
-            img.src = "./image/timer/" + i + ".png";
-            img.onload = function () {
-                process += 2;
-            }
-            timeImgArr.push(img);
+            (function (i) {
+                var img = new Image();
+                img.src = "./image/timer/" + i + ".png";
+                img.onload = function () {
+                    process += 2;
+                }
+                timeImgArr.push(img);
+            })(i)
+            
         }
 
         dialogueImg = new Image();
