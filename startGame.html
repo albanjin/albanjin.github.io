@@ -46,35 +46,38 @@
         }
 
         for(var i = 0;i < 20; i++){
-            var img = new Image();
-            img.src = "./image/game"+ ( i + 1 ) + ".jpg";
-        
-            img.onload = (function (i) {
-                process += 2;
-            } )(i)   
-            
-            gameImg.push(img);
-            
+            (function (i){
+                var img = new Image();
+                img.src = "./image/game"+ ( i + 1 ) + ".jpg";
+                img.onload = function () {
+                    process += 2;
+                }   
+                gameImg.push(img);
+            })(i) 
         }
 
         for(var i = 0 ; i < 6; i++ ){
-            var img = new Image();
-            img.src = "./image/"+  i  + ".png";
-            img.onload = (function (i) {
-                 process += 3;
-            })(i)
-            leftPic.push(img); 
+            (function (i) {
+                var img = new Image();
+                img.src = "./image/"+  i  + ".png";
+                img.onload = function () {
+                     process += 3;
+                }
+                leftPic.push(img); 
+            })(i);
+            
         }
 
         for(var i = 0 ; i < 3;i++){
-            
-            var img = new Image();
-            img.src = "./image/btnStart" + i + ".png";
-            img.onload = (function (i){
-                process += 3;
-            })(i);
-            btnImgArr.push(img);
-            
+            (function (i){
+                var img = new Image();
+                img.src = "./image/btnStart" + i + ".png";
+                img.onload = function (){
+                    process += 3;
+                };
+                btnImgArr.push(img);
+
+            })(i)    
         }
 
         btnBorder = new Image();
@@ -83,13 +86,22 @@
             process += 2;
         }
 
+
+        (function(k){
+            as[i].onclick = function()
+            {
+                alert(k);
+            };
+        })(i)
+
         for(var i = 0 ; i < 10; i++){
             
             var img = new Image();
             img.src = "./image/timer/" + i + ".png";
-            img.onload = (function (i) {
+            img.onload = function (i) {
                 process += 2;
-            })(i);
+
+            };
             timeImgArr.push(img);
  
         }
@@ -587,7 +599,7 @@
         setInterval(function(){
 
             if(!process == 100){
-
+                console.log(process);
             }else{
                 ctx.clearRect(0,0,1280,720);
                 ctx.drawImage(backgroundImg,0,0);
