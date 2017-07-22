@@ -593,7 +593,7 @@
     function startEngine(){
         setInterval(function(){
 
-            if(!process == 100){
+            if(process < 100){
                 console.log(process);
             }else{
                 ctx.clearRect(0,0,1280,720);
