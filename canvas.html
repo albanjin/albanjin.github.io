@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .jin_box {
+            width: 882px;
+            height: 495px;
+            border: 1px solid #333;
+            border-radius: 20px;
+            margin: 100px auto;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="jin_box">
+        <canvas id="myCanvas" width="882" height="495"></canvas>
+    </div>
+</body>
+
+<script type="text/javascript">
+    var myCanvas = document.getElementById("myCanvas");
+    var cxt = myCanvas.getContext("2d");
+    var myCanvasWidth = myCanvas.clientWidth;
+    var myCanvasHeight = myCanvas.clientHeight;
+    var GAMEOVER = false;
+</script>
+
+<script type="text/javascript" src="./js/startGame.js"></script>
+
+</html>
