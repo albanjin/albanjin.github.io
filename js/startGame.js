@@ -32,15 +32,16 @@ function getAllImage() {
         //bear 6
     bearImage = [];
     for (var i = 0; i < 6; i++) {
-        (function(i) {
+        //(function(i) {
+        var index = i;
             var img = new Image();
-            img.src = './image/canvas/bear' + i + '.png';
+            img.src = './image/canvas/bear' + index + '.png';
             img.onload = function() {
                 process += 7;
                 drawProgress();
             }
             bearImage.push(img);
-        })(i)
+       // })(i)
     }
     //台阶
     barImage = new Image();
@@ -59,15 +60,16 @@ function getAllImage() {
         //怪兽
     obstacleImage = [];
     for (var i = 0; i < 4; i++) {
-        (function(i) {
+        var index = i;
+        //(function(i) {
             var img = new Image();
-            img.src = "./image/canvas/obstacle" + i + ".png";
+            img.src = "./image/canvas/obstacle" + index + ".png";
             img.onload = function() {
                 process += 6;
                 drawProgress();
             }
             obstacleImage.push(img);
-        })(i)
+     //   })(i)
     }
     //海浪
     waveImage = new Image();
