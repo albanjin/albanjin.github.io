@@ -208,5 +208,30 @@ gulp.task("default",['watch'],function(){
 		});
 	</pre>
 
+	<h2>配置合并js</h2>
+	<pre>
+		gulp.task('concatJs',function () {
+			return gulp.src(app.srcPath + "js/**/*.js")
+				.pipe($.concat("all.js"))
+				.pipe($.uglify())       
+				.pipe($.rename({suffix:'.min'}))
+				.pipe(gulp.dest(app.distPath + "js/"))
+		})
+	</pre>
+	<h2>packjson 开发依赖</h2>
+	<pre>
+		  "devDependencies": {
+				"browser-sync": "^2.18.13",
+				"gulp": "^3.9.1",
+				"gulp-cssmin": "^0.2.0",
+				"gulp-htmlmin": "^3.0.0",
+				"gulp-less": "^3.3.2",
+				"gulp-load-plugins": "^1.5.0",
+				"gulp-rename": "^1.2.2",
+				"gulp-sass": "^3.1.0",
+				"gulp-uglify": "^3.0.0"
+		  }
+	</pre>
+
 </body>
 </html>
