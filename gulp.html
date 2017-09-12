@@ -193,5 +193,20 @@ gulp.task("default",['watch'],function(){
 
 	</pre>
 
+	<h2>配置Sass</h2>
+	<pre>
+		gulp.task('sass', function() {
+			return gulp.src(app.srcPath + 'sass/**/*.scss')
+				.pipe($.sass().on('error', $.sass.logError))
+				.pipe(gulp.dest(app.distPath + 'css/'))
+				.pipe(browserSync.stream())
+				.pipe($.cssmin())
+				.pipe($.rename({ suffix: '.min' }))
+				.pipe(gulp.dest(app.distPath + 'css/'))
+				//.pipe(browserSync.reload({ stream: true }))
+				.pipe(browserSync.stream());
+		});
+	</pre>
+
 </body>
 </html>
