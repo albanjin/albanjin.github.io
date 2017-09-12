@@ -1,0 +1,197 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>git命令</title>
+	<style type="text/css">
+		body{background: #333;}
+		*{font-size:18px;font-weight: 600;color: #fff; }
+	</style>
+</head>
+<body>
+
+	<h2>Vue</h2>
+
+	<pre >
+1、配置全局gulp
+  	npm install -g gulp
+
+2、新建项目
+	cmd 环境下 
+		mkdir productName
+
+3、进入 productName
+	 cd productName;
+
+4、初始化项目,新建packjson文件
+	npm init --yes
+
+5、新建gulpfile.js
+	
+6、下载开发环境
+	npm i --save-dev gulp
+
+7、	编写gulpfile.js,参照官方文档
+
+	eg：对scss文件进行编译，压缩，重命名	
+
+		'use strict';
+
+		var gulp = require('gulp');
+		var sass = require('gulp-sass');
+		var cssmin = require('gulp-cssmin');
+		var rename = require('gulp-rename');
+
+		gulp.task('sass', function() {
+		    return gulp.src('./sass/**/*.scss')
+		        .pipe(sass().on('error', sass.logError))
+		        .pipe(cssmin())
+		        .pipe(rename({ suffix: '.min' }))
+		        .pipe(gulp.dest('./css'));
+		});
+
+		gulp.task('sass:watch', function() {
+		    gulp.watch('./sass/**/*.scss', ['sass']);
+		});
+
+
+8、对文件进行监视
+
+9、浏览器的同步 browersync
+
+	1、安装全局、
+		npm install -g browser-sync
+
+	2、安装项目
+		npm install browser-sync --save-dev
+
+10 通用gulpfile.js
+
+//1、严格语法模式
+'use strict'
+
+//2、加载模块
+var gulp = require("gulp");
+// 多模块加载
+//  gulp-load-plugins   ==> gulp 组件自动化管理工具
+//						==> 可以根据当前gulp 文件的使用自动添加相关组件
+//						==> **** 只会管理已安装的组件，首先需要手动安装组件
+
+// 浏览器同步组件
+var browserSync = require('browser-sync').create();
+
+var $ = require("gulp-load-plugins")();
+// var loadPlugins = require("gulp-load-plugins");
+// //  方法返回的是一个对象  包含所有gulp的组件名称
+// //  $.htmlmin   $.less
+// var $ = loadPlugins();
+
+//3、定义全局变量
+var app = {
+	srcPath:"src/",
+	distPath:"dist/",
+	proName:"itany"
+}
+
+
+//1、html的拷贝
+gulp.task("html",function(){
+	gulp.src(app.srcPath+"**/*.html")
+		.pipe($.htmlmin({
+			collapseBooleanAttributes:true,
+			removeEmptyAttributes:true
+		}))
+		.pipe(gulp.dest(app.distPath))
+		.pipe(browserSync.stream());
+});
+
+//2、less 编译拷贝压缩重命名合并
+gulp.task("less",function(){
+	gulp.src(app.srcPath+"**/*.less")
+		.pipe($.less())
+		.pipe($.concat(app.proName+".css"))
+		.pipe(gulp.dest(app.distPath+"css"))
+		.pipe($.cssmin()) // css 压缩
+		.pipe($.rename({suffix:".min"}))  //重名名并追加后缀
+		.pipe(gulp.dest(app.distPath+"css"))  //指定编译文件的目录（less编译后生成css文件）
+		.pipe(browserSync.stream());
+});
+
+//3、js的拷贝压缩混淆合并
+gulp.task("js",function(){
+	gulp.src(app.srcPath+"js/**/*.js")
+		//补充功能  文件合并
+		.pipe($.concat(app.proName+".js"))
+		.pipe(gulp.dest(app.distPath+"js/"))
+		.pipe($.uglify())
+		.pipe($.rename({suffix:".min"}))
+		.pipe(gulp.dest(app.distPath+"js"))
+		.pipe(browserSync.stream());
+});
+
+//4、utilJs的拷贝
+gulp.task("utilJs",function(){
+	gulp.src(app.srcPath+"utilJs/**/*.js")
+		.pipe(gulp.dest(app.distPath+"js/"))
+		.pipe(browserSync.stream());
+});
+
+
+//5、清空
+gulp.task("clean",function(){
+	gulp.src("dist/")  //指定需要清除的目录   直接清除dist/下的所有文件
+		.pipe($.clean())  //  直接执行 清除任务，不需要再去指定目标目录
+		.pipe(browserSync.stream());
+});
+
+// 任务合并
+gulp.task("mytask",['less','js','utilJs','html']);
+
+
+// 添加监视器  完成全自动任务
+/*
+	HTML JS LESS 文件的修改
+
+	自动执行任务
+
+	监视器 本身也是一个任务
+	需要启动   如何去启动监视器？
+	将gulp.watch 写在 gulp.task 中
+
+*/
+gulp.task("watch",['less','js','utilJs','html'],function(){
+
+	gulp.watch(app.srcPath+"**/*.html",['html']);
+	gulp.watch(app.srcPath+"**/*.less",['less']);
+	gulp.watch(app.srcPath+"js/**/*.js",['js']);
+	gulp.watch(app.srcPath+"utilJs/**/*.js",['utilJs']);
+});
+
+
+/*
+	浏览器同步静态服务器
+*/
+gulp.task("by",['watch'],function(){
+	browserSync.init({
+		server:{
+			baseDir:app.distPath
+		},
+		port:8080
+	});
+});
+
+//gulp 默认启动服务
+//default  是gulp的默认启动任务
+gulp.task("default",['watch'],function(){
+	browserSync.init({
+		server:{
+			baseDir:app.distPath
+		},
+		port:8080
+	});
+});
+
+	</pre>
+
+</body>
+</html>
