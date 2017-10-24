@@ -1,24 +1,59 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>index</title>
+    <title>index</title>
+    <script src="./js/jquery-3.1.1.min.js"></script>
 </head>
-	<style type="text/css">
-		*{margin: 0px;padding: 0px;font-weight: 600;font-size: 18px;color: #fff;}
-		body{background: #333;}
-		a{text-decoration: none;display: block;line-height: 40px;
-			margin:5px 100px; }
-			a:nth-child(1){
-				margin-top:50px; 
-			}
-	</style>
+<style type="text/css">
+    * {
+        margin: 0px;
+        padding: 0px;
+        font-weight: 600;
+        font-size: 18px;
+        color: #fff;
+    }
+    
+    body {
+        background: #333;
+    }
+    
+    a {
+        text-decoration: none;
+        display: block;
+        line-height: 40px;
+        margin: 5px 100px;
+    }
+    
+    a:nth-child(1) {
+        margin-top: 50px;
+    }
+</style>
+
 <body>
-	<a href="./git.html">Git笔记</a>
-	<a href="./startGame.html">canvas小游戏</a>
-	<a href="./notes.html">数组去重</a>
-	<a href="./vue.html">vue笔记</a>
-	<a href="./gulp.html">gulp配置文件</a>
-	<a href="./canvas.html">canvas小游戏2</a>
+    <a href="./git.html">Git笔记</a>
+    <a href="./startGame.html">canvas小游戏</a>
+    <a href="./notes.html">数组去重</a>
+    <a href="./vue.html">vue笔记</a>
+    <a href="./gulp.html">gulp配置文件</a>
+    <a href="./canvas.html">canvas小游戏2</a>
+
+    <div id='test'></div>
+    <script>
+        //页面加载   获取全部信息
+        $(function() {
+            $.ajax({
+                type: "POST", //请求方式
+                url: "json/package.json", //地址，就是json文件的请求路径
+                dataType: "json", //数据类型可以为 text xml json  script  jsonp
+                success: function(result) { //返回的参数就是 action里面所有的有get和set方法的参数
+                    // addBox(result);
+                    console.log(result)
+                }
+            });
+        });
+    </script>
 
 </body>
+
 </html>
