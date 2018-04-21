@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,125 +9,136 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="renderer" content="webkit">
     <meta name="description" content="">
+    <link rel="stylesheet" href="./animate.css">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
     <style>
-            *{margin: 0;padding: 0;}
-        html,body{
-            width: 100%;
-            height: 100%;
-            
+        * {
+            margin: 0;
+            padding: 0;
         }
         
-        .page1{
+        html,
+        body {
             width: 100%;
             height: 100%;
-            background:  #333333;
-           -opacity: 0;
         }
-        .container-box{
+        
+        .page1 {
+            width: 100%;
+            height: 100%;
+            background: #333333;
+            -opacity: 0;
+        }
+        
+        .container-box {
             width: 100%;
             height: 90%;
             position: absolute;
-            top:50%;
-            transform: translate3d(0,-50%,0)
+            top: 50%;
+            transform: translate3d(0, -50%, 0)
         }
-        .img-text{
+        
+        .img-text {
             position: absolute;
             left: 50%;
-            transform: translate3d(-50%,0,0);
+            transform: translate3d(-50%, 0, 0);
             border: 1px solid red;
         }
-
+        
         @keyframes rollInLeft {
-            0%{
+            0% {
                 opacity: 0;
-                transform: translate3d(-30%,-10%,0) rotate3d(0,0,1,30deg);
-                -webkit-transform: translate3d(-30%,-10%,0) rotate3d(0,0,1,30deg)
+                transform: translate3d(-30%, -10%, 0) rotate3d(0, 0, 1, 30deg);
+                -webkit-transform: translate3d(-30%, -10%, 0) rotate3d(0, 0, 1, 30deg)
             }
-            100%{
+            100% {
                 opacity: 1;
-                transform: translate3d(0%,0%,0) rotate3d(0,0,1,0deg);
-                -webkit-transform: translate3d(0,0,0) rotate3d(0,0,1,0deg)
+                transform: translate3d(0%, 0%, 0) rotate3d(0, 0, 1, 0deg);
+                -webkit-transform: translate3d(0, 0, 0) rotate3d(0, 0, 1, 0deg)
             }
         }
+        
         @-webkit-keyframes rollInLeft {
-            0%{
+            0% {
                 opacity: 0;
-                transform: translate3d(-30%,-10%,0) rotate3d(0,0,1,30deg);
-                -webkit-transform: translate3d(-30%,-10%,0) rotate3d(0,0,1,30deg)
+                transform: translate3d(-30%, -10%, 0) rotate3d(0, 0, 1, 30deg);
+                -webkit-transform: translate3d(-30%, -10%, 0) rotate3d(0, 0, 1, 30deg)
             }
-            100%{
+            100% {
                 opacity: 1;
-                transform: translate3d(0%,0%,0);
-                -webkit-transform: translate3d(0,0,0)
+                transform: translate3d(0%, 0%, 0);
+                -webkit-transform: translate3d(0, 0, 0)
             }
         }
-
+        
         @-webkit-keyframes rollOutRight {
-            
-            0%{
+            0% {
                 opacity: 1;
-                transform: translate3d(0%,0%,0);
-                -webkit-transform: translate3d(0,0,0)
+                transform: translate3d(0%, 0%, 0);
+                -webkit-transform: translate3d(0, 0, 0)
             }
-            100%{
+            100% {
                 opacity: 0;
-                transform: translate3d(30%,-10%,0) rotate3d(0,0,1,-30deg);
-                -webkit-transform: translate3d(30%,-10%,0) rotate3d(0,0,1,-30deg)
+                transform: translate3d(30%, -10%, 0) rotate3d(0, 0, 1, -30deg);
+                -webkit-transform: translate3d(30%, -10%, 0) rotate3d(0, 0, 1, -30deg)
             }
         }
-
+        
         @keyframes rollOutRight {
-            
-            0%{
+            0% {
                 opacity: 1;
-                transform: translate3d(0%,0%,0);
-                -webkit-transform: translate3d(0,0,0)
+                transform: translate3d(0%, 0%, 0);
+                -webkit-transform: translate3d(0, 0, 0)
             }
-            100%{
+            100% {
                 opacity: 0;
-                transform: translate3d(30%,-10%,0) rotate3d(0,0,1,-30deg);
-                -webkit-transform: translate3d(30%,-10%,0) rotate3d(0,0,1,-30deg)
+                transform: translate3d(30%, -10%, 0) rotate3d(0, 0, 1, -30deg);
+                -webkit-transform: translate3d(30%, -10%, 0) rotate3d(0, 0, 1, -30deg)
             }
         }
-
-        .poster-box,img{
+        
+        .poster-box,
+        img {
             width: 300px;
         }
-        .poster-box img{
-            opacity:  0;
-            animation: rollInLeft 1.5s linear forwards;
-            -webkit-animation: rollInLeft 1.5s linear forwards;
+        
+        .poster-box img {
+            //opacity:  0;
+            //animation: rollInLeft 1.5s linear forwards;
+            //-webkit-animation: rollInLeft 1.5s linear forwards;
         }
     </style>
     <title>- 美篇</title>
 </head>
+
 <body>
     <div class="page1">
         <div class='container-box'>
             <div class="img-text">
                 <div class='poster-box'>
-                    <img id='img-box' src="http://t-static2.ivwen.com/users/14368562/86e7f38b02d04ea49a33933b38a488dd.jpg-mobile"> 
+                    <img id='img-box' class="animated rollIn" src="http://t-static2.ivwen.com/users/14368562/86e7f38b02d04ea49a33933b38a488dd.jpg-mobile">
                 </div>
                 <p class="text line-clamp-2"></p>
-            </div>  
+            </div>
         </div>
     </div>
     <script>
         var target = document.getElementById('img-box')
         var index = 0
         var canMove = false
-        var timer = setInterval(function(){
-            index ++
+        var timer = setInterval(function() {
+            index++
 
-            if(index > 30){
+            if (index > 30) {
                 clearInterval(timer)
-                target.style.animation = " rollOutRight 1.5s linear forwards";
-                target.style['-webkit-animation'] = " rollOutRight 1.5s linear forwards";
+                    //target.style.animation = " rollOutRight 1.5s linear forwards";
+                    //target.style['-webkit-animation'] = " rollOutRight 1.5s linear forwards";
+                target.classList.value = 'animated rollOut'
             }
-            
 
-        },100)
+
+        }, 100)
     </script>
 </body>
+
 </html>
