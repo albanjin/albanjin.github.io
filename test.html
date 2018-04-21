@@ -104,6 +104,45 @@
             }
         }
         
+        @-webkit-keyframes rotateIn {
+            from {
+                -webkit-transform-origin: center;
+                transform-origin: center;
+                -webkit-transform: rotate3d(0, 0, 1, -200deg);
+                transform: rotate3d(0, 0, 1, -200deg);
+                opacity: 0;
+            }
+            to {
+                -webkit-transform-origin: center;
+                transform-origin: center;
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes rotateIn {
+            from {
+                -webkit-transform-origin: -300% 50%;
+                transform-origin: -300% 50%;
+                -webkit-transform: rotate3d(0, 0, 1, -200deg);
+                transform: rotate3d(0, 0, 1, -200deg);
+                opacity: 0;
+            }
+            to {
+                -webkit-transform-origin: -300% 50%;
+                transform-origin: -300% 50%;
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+                opacity: 1;
+            }
+        }
+        
+        .rotateIn {
+            -webkit-animation-name: rotateIn;
+            animation-name: rotateIn;
+        }
+        
         .poster-box,
         img {
             width: 300px;
@@ -133,7 +172,7 @@
         <div class='container-box'>
             <div class="img-text">
                 <div class='poster-box'>
-                    <img id='img-box' class="animated rollInLef" src="http://t-static2.ivwen.com/users/14368562/86e7f38b02d04ea49a33933b38a488dd.jpg-mobile">
+                    <img id='img-box' class="animated rotateIn" src="http://t-static2.ivwen.com/users/14368562/86e7f38b02d04ea49a33933b38a488dd.jpg-mobile">
                 </div>
                 <p class="text line-clamp-2"></p>
             </div>
