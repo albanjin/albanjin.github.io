@@ -173,10 +173,16 @@
             index++
 
             if (index > 30) {
-                clearInterval(timer)
+                //clearInterval(timer)
+                canMove = true
                     //target.style.animation = " rollOutRight 1.5s linear forwards";
                     //target.style['-webkit-animation'] = " rollOutRight 1.5s linear forwards";
                 target.classList.value = 'animated rotateOut'
+            }
+            if (index > 45) {
+                canMove = false
+                index = 0
+                target.classList.value = 'animated rotateIn'
             }
 
 
