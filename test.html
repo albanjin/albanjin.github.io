@@ -9,7 +9,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="renderer" content="webkit">
     <meta name="description" content="">
-    <link rel="stylesheet" href="./animate.css">
+
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
     <style>
         .animated {
@@ -52,58 +52,6 @@
             border: 1px solid red;
         }
         
-        @keyframes rollInLeft {
-            from {
-                opacity: 0;
-                -webkit-transform: translate3d(-100%, -30%, 0) rotate3d(0, 0, 1, 30deg);
-                transform: translate3d(-100%, -30%, 0) rotate3d(0, 0, 1, 30deg);
-            }
-            to {
-                opacity: 1;
-                -webkit-transform: translate3d(0, 0, 0);
-                transform: translate3d(0, 0, 0);
-            }
-        }
-        
-        @-webkit-keyframes rollInLeft {
-            from {
-                opacity: 0;
-                -webkit-transform: translate3d(-100%, -30%, 0) rotate3d(0, 0, 1, -30deg);
-                transform: translate3d(-100%, -30%, 0) rotate3d(0, 0, 1, -30deg);
-            }
-            to {
-                opacity: 1;
-                -webkit-transform: translate3d(0, 0, 0);
-                transform: translate3d(0, 0, 0);
-            }
-        }
-        
-        @-webkit-keyframes rollOutRight {
-            0% {
-                opacity: 1;
-                transform: translate3d(0%, 0%, 0);
-                -webkit-transform: translate3d(0, 0, 0)
-            }
-            100% {
-                opacity: 0;
-                transform: translate3d(100%, -30%, 0) rotate3d(0, 0, 1, -30deg);
-                -webkit-transform: translate3d(100%, -30%, 0) rotate3d(0, 0, 1, -30deg)
-            }
-        }
-        
-        @keyframes rollOutRight {
-            0% {
-                opacity: 1;
-                transform: translate3d(0%, 0%, 0);
-                -webkit-transform: translate3d(0, 0, 0)
-            }
-            100% {
-                opacity: 0;
-                transform: translate3d(100%, -30%, 0) rotate3d(0, 0, 1, -30deg);
-                -webkit-transform: translate3d(100%, -30%, 0) rotate3d(0, 0, 1, -30deg)
-            }
-        }
-        
         @-webkit-keyframes rotateIn {
             from {
                 -webkit-transform-origin: 50% -100%;
@@ -125,8 +73,8 @@
             from {
                 -webkit-transform-origin: 50% -100%;
                 transform-origin: 50% -100%;
-                -webkit-transform: rotate3d(0, 0, 1, -30deg);
-                transform: rotate3d(0, 0, 1, -30deg);
+                -webkit-transform: rotate3d(0, 0, 1, 30deg);
+                transform: rotate3d(0, 0, 1, 30deg);
                 opacity: 0;
             }
             to {
@@ -141,6 +89,45 @@
         .rotateIn {
             -webkit-animation-name: rotateIn;
             animation-name: rotateIn;
+        }
+        
+        @-webkit-keyframes rotateOut {
+            from {
+                -webkit-transform-origin: 50% -100%;
+                transform-origin: 50% -100%;
+                -webkit-transform: rotate3d(0, 0, 1, -30deg);
+                transform: rotate3d(0, 0, 1, -30deg);
+                opacity: 0;
+            }
+            to {
+                -webkit-transform-origin: 50% -100%;
+                transform-origin: 50% -100%;
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes rotateOut {
+            from {
+                -webkit-transform-origin: 50% -100%;
+                transform-origin: 50% -100%;
+                -webkit-transform: rotate3d(0, 0, 1, -30deg);
+                transform: rotate3d(0, 0, 1, -30deg);
+                opacity: 0;
+            }
+            to {
+                -webkit-transform-origin: 50% -100%;
+                transform-origin: 50% -100%;
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+                opacity: 1;
+            }
+        }
+        
+        .rotateOut {
+            -webkit-animation-name: rotateOut;
+            animation-name: rotateOut;
         }
         
         .poster-box,
@@ -189,7 +176,7 @@
                 clearInterval(timer)
                     //target.style.animation = " rollOutRight 1.5s linear forwards";
                     //target.style['-webkit-animation'] = " rollOutRight 1.5s linear forwards";
-                target.classList.value = 'animated rollInRigh'
+                target.classList.value = 'animated rotateOut'
             }
 
 
