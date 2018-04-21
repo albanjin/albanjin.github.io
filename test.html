@@ -9,9 +9,16 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="renderer" content="webkit">
     <meta name="description" content="">
-    <link rel="stylesheet" href="./animate.css">
+
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
     <style>
+        .animated {
+            -webkit-animation-duration: 1.5s;
+            animation-duration: 1.5s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -46,28 +53,28 @@
         }
         
         @keyframes rollInLeft {
-            0% {
+            from {
                 opacity: 0;
-                transform: translate3d(-30%, -10%, 0) rotate3d(0, 0, 1, 30deg);
-                -webkit-transform: translate3d(-30%, -10%, 0) rotate3d(0, 0, 1, 30deg)
+                -webkit-transform: translate3d(-100%, -30%, 0) rotate3d(0, 0, 1, 30deg);
+                transform: translate3d(-100%, -30%, 0) rotate3d(0, 0, 1, 30deg);
             }
-            100% {
+            to {
                 opacity: 1;
-                transform: translate3d(0%, 0%, 0) rotate3d(0, 0, 1, 0deg);
-                -webkit-transform: translate3d(0, 0, 0) rotate3d(0, 0, 1, 0deg)
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
             }
         }
         
         @-webkit-keyframes rollInLeft {
-            0% {
+            from {
                 opacity: 0;
-                transform: translate3d(-30%, -10%, 0) rotate3d(0, 0, 1, 30deg);
-                -webkit-transform: translate3d(-30%, -10%, 0) rotate3d(0, 0, 1, 30deg)
+                -webkit-transform: translate3d(-100%, -30%, 0) rotate3d(0, 0, 1, -30deg);
+                transform: translate3d(-100%, -30%, 0) rotate3d(0, 0, 1, -30deg);
             }
-            100% {
+            to {
                 opacity: 1;
-                transform: translate3d(0%, 0%, 0);
-                -webkit-transform: translate3d(0, 0, 0)
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
             }
         }
         
@@ -79,8 +86,8 @@
             }
             100% {
                 opacity: 0;
-                transform: translate3d(30%, -10%, 0) rotate3d(0, 0, 1, -30deg);
-                -webkit-transform: translate3d(30%, -10%, 0) rotate3d(0, 0, 1, -30deg)
+                transform: translate3d(100%, -30%, 0) rotate3d(0, 0, 1, -30deg);
+                -webkit-transform: translate3d(100%, -30%, 0) rotate3d(0, 0, 1, -30deg)
             }
         }
         
@@ -92,8 +99,8 @@
             }
             100% {
                 opacity: 0;
-                transform: translate3d(30%, -10%, 0) rotate3d(0, 0, 1, -30deg);
-                -webkit-transform: translate3d(30%, -10%, 0) rotate3d(0, 0, 1, -30deg)
+                transform: translate3d(100%, -30%, 0) rotate3d(0, 0, 1, -30deg);
+                -webkit-transform: translate3d(100%, -30%, 0) rotate3d(0, 0, 1, -30deg)
             }
         }
         
@@ -107,6 +114,16 @@
             //animation: rollInLeft 1.5s linear forwards;
             //-webkit-animation: rollInLeft 1.5s linear forwards;
         }
+        
+        .rollInLef {
+            -webkit-animation-name: rollInLeft;
+            animation-name: rollInLeft;
+        }
+        
+        .rollInRigh {
+            -webkit-animation-name: rollInLeft;
+            animation-name: rollOutRight;
+        }
     </style>
     <title>- 美篇</title>
 </head>
@@ -116,7 +133,7 @@
         <div class='container-box'>
             <div class="img-text">
                 <div class='poster-box'>
-                    <img id='img-box' class="animated rollIn" src="http://t-static2.ivwen.com/users/14368562/86e7f38b02d04ea49a33933b38a488dd.jpg-mobile">
+                    <img id='img-box' class="animated rollInLef" src="http://t-static2.ivwen.com/users/14368562/86e7f38b02d04ea49a33933b38a488dd.jpg-mobile">
                 </div>
                 <p class="text line-clamp-2"></p>
             </div>
@@ -133,7 +150,7 @@
                 clearInterval(timer)
                     //target.style.animation = " rollOutRight 1.5s linear forwards";
                     //target.style['-webkit-animation'] = " rollOutRight 1.5s linear forwards";
-                target.classList.value = 'animated rollOut'
+                target.classList.value = 'animated rollInRigh'
             }
 
 
